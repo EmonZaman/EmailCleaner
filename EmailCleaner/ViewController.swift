@@ -26,6 +26,27 @@ class ViewController: UIViewController {
         }
     }
     
+    // Define a struct to represent categorized messages
+    struct CategorizedMessage {
+        enum Category {
+            case primary, promotions, social, updates, forums, sent, drafts, spam, trash
+        }
+        
+        let message: GTLRGmail_Message
+        let category: Category
+    }
+    
+    
+    var primaryMessages: [CategorizedMessage] = []
+    var promotionsMessages: [CategorizedMessage] = []
+    var sentMessages: [CategorizedMessage] = []
+    var socialMessages: [CategorizedMessage] = []
+    var spamMessages: [CategorizedMessage] = []
+    var updatesMessages: [CategorizedMessage] = []
+    var forumsMessages: [CategorizedMessage] = []
+    var draftsMessages: [CategorizedMessage] = []
+    var trashMessages: [CategorizedMessage] = []
+    
     private var service: GTLRGmailService?
     var allMessages: [GTLRGmail_Message] = []
     
@@ -37,32 +58,6 @@ class ViewController: UIViewController {
     var output: UITextView?
     
     
-    //    @IBAction func signIn(sender: Any) {
-    //        GIDSignIn.sharedInstance.signIn(withPresenting: self) { signInResult, error in
-    //            guard error == nil else { return }
-    //
-    //            if let user = signInResult?.user {
-    //                let userEmail = user.profile?.email
-    //                let userName = user.profile?.name
-    //                let userGivenName = user.profile?.givenName
-    //                let userFamilyName = user.profile?.familyName
-    //
-    //                print("User Email: \(userEmail ?? "N/A")")
-    //                print("User Name: \(userName ?? "N/A")")
-    //                print("User Given Name: \(userGivenName ?? "N/A")")
-    //                print("User Family Name: \(userFamilyName ?? "N/A")")
-    //
-    //                // You can now use the user details in your app's logic
-    //            }
-    //
-    //            // If sign in succeeded, display the app's main content View.
-    //        }
-    //    }
-    //    @IBAction func signOut(sender: Any) {
-    //      GIDSignIn.sharedInstance.signOut()
-    //    }
-    
-    // var emails: [MCOIMAPMessage] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,9 +72,6 @@ class ViewController: UIViewController {
             }
             
         }
-        
-        
-        
         
         //   self.fetchEmails()
         
@@ -139,19 +131,11 @@ class ViewController: UIViewController {
         GIDSignIn.sharedInstance.signIn(withPresenting: self) { signInResult, error in
             
             guard error == nil else { return }
-            
-            
-            print(signInResult?.user.profile?.name)
-            
-            
             if let user = signInResult?.user {
-                
                 
                 print("FALSE ===== 1111")
                 
-                
                 let driveScope = "https://www.googleapis.com/auth/gmail.modify"
-                
                 
                 let grantedScopes = user.grantedScopes
                 let service = GTLRGmailService()
@@ -168,16 +152,11 @@ class ViewController: UIViewController {
                     guard let currentUser = GIDSignIn.sharedInstance.currentUser else {
                         return ;  /* Not signed in. */
                     }
-                    
-                    
-                    
                     currentUser.addScopes(additionalScopes, presenting: self) { signInResult, error in
                         guard error == nil else { return }
                         guard let signInResult = signInResult else { return }
                         
                         print("FALSE ===== 2222")
-                        
-                        
                         
                         // Check if the user granted access to the scopes you requested.
                     }
@@ -211,19 +190,14 @@ class ViewController: UIViewController {
                 }
                 else{
                     
-                    
                     print("FALSE ===== else codition and authorized")
-                    
                     service.authorizer =  user.fetcherAuthorizer
-                    
                     self.gmailService = service
                     
                     // Fetch inbox messages using batch query
                     // self.fetchInboxMessages()
                     self.fetchInboxMessages()
                 }
-                
-                
                 // Update UI or perform other actions
             }
             
@@ -247,7 +221,7 @@ class ViewController: UIViewController {
     }
     
     
-    //MARK: Fethinf Message working
+    //MARK: Fethching Message working
     
     //    func fetchInboxMessages(pageToken: String? = nil) {
     //        guard let service = gmailService else {
@@ -318,7 +292,16 @@ class ViewController: UIViewController {
             return
         }
         
+        var totalMessageFound = 0
+        
         let query = GTLRGmailQuery_UsersMessagesList.query(withUserId: "me")
+        // query.labelIds = ["SENT"]
+        //   query.labelIds = ["INBOX", "CATEGORY_PROMOTIONS", "CATEGORY_SOCIAL", "CATEGORY_UPDATES", "CATEGORY_FORUMS", "SENT", "DRAFT", "SPAM", "TRASH"]
+        query.pageToken = pageToken // Set the page token for pagination
+        
+        //    query.q = "is:unread"
+        //   query.q = "has:attachment"
+        
         query.labelIds = ["SENT"]
         query.pageToken = pageToken // Set the page token for pagination
         
@@ -332,15 +315,17 @@ class ViewController: UIViewController {
             
             if let messagesResponse = response as? GTLRGmail_ListMessagesResponse,
                let messages = messagesResponse.messages {
+                
+                totalMessageFound += messages.count
                 print("Fetched count \(messages.count) inbox email messages")
                 
                 for message in messages {
                     
-                    print(message)
+                    //   print(message)
                     
                     //    self.fetchMessageDetails(messageId: message.identifier!)
                     
-                    self.deleteMessage(messageId: message.identifier!)
+                    //  self.deleteMessage(messageId: message.identifier!)
                 }
                 
                 // Fetch the next page if available
@@ -348,7 +333,7 @@ class ViewController: UIViewController {
                     self.fetchInboxMessages(pageToken: nextPageToken)
                 } else {
                     // All messages have been fetched
-                    print("Total messages fetched: \(messages.count)")
+                    print("Total messages fetched: \(totalMessageFound)")
                 }
             }
         }
