@@ -85,54 +85,54 @@ class ViewController: UIViewController {
         
         // Do any additional setup after loading the view.
     }
-//    func requestAdditionalScopesAndMakeAPICall() {
-//        let additionalScopes = ["https://www.googleapis.com/auth/gmail.readonly"]
-//
-//        guard let currentUser = GIDSignIn.sharedInstance.currentUser else {
-//            return // Not signed in.
-//        }
-//
-//        currentUser.addScopes(additionalScopes, presenting: self) { signInResult, error in
-//            guard error == nil else { return }
-//
-//            // Get the user's granted scopes
-//            let grantedScopes = currentUser.grantedScopes
-//
-//            // Check if the user granted access to the scopes you requested.
-//            if ((grantedScopes?.contains("https://www.googleapis.com/auth/gmail.readonly")) != nil) {
-//                // Make an API call with fresh tokens
-//                currentUser.refreshTokensIfNeeded { user, error in
-//                    guard error == nil else { return }
-//                    guard let user = user else { return }
-//
-//                    // Get the access token to attach it to an API request.
-//                    let accessToken = user.accessToken.tokenString
-//
-//                    // Initialize the Gmail service
-//                    let service = GTLRGmailService()
-//                    service.authorizer = user.fetcherAuthorizer
-//
-//                    // Create a Gmail API request
-//                    let query = GTLRGmailQuery_UsersMessagesList.query(withUserId: "me")
-//                    query.q = "is:unread"
-//
-//                    service.executeQuery(query) { ticket, result, error in
-//                        // Handle the API response
-//                        if error == nil, let messages = (result as? GTLRGmail_ListMessagesResponse)?.messages {
-//                            // Process the list of unread messages
-//                            for message in messages {
-//                                if let messageId = message.identifier {
-//                                    print("Unread message ID: \(messageId)")
-//                                }
-//                            }
-//                        } else {
-//                            print("Error fetching unread messages: \(error?.localizedDescription ?? "Unknown error")")
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    }
+    //    func requestAdditionalScopesAndMakeAPICall() {
+    //        let additionalScopes = ["https://www.googleapis.com/auth/gmail.readonly"]
+    //
+    //        guard let currentUser = GIDSignIn.sharedInstance.currentUser else {
+    //            return // Not signed in.
+    //        }
+    //
+    //        currentUser.addScopes(additionalScopes, presenting: self) { signInResult, error in
+    //            guard error == nil else { return }
+    //
+    //            // Get the user's granted scopes
+    //            let grantedScopes = currentUser.grantedScopes
+    //
+    //            // Check if the user granted access to the scopes you requested.
+    //            if ((grantedScopes?.contains("https://www.googleapis.com/auth/gmail.readonly")) != nil) {
+    //                // Make an API call with fresh tokens
+    //                currentUser.refreshTokensIfNeeded { user, error in
+    //                    guard error == nil else { return }
+    //                    guard let user = user else { return }
+    //
+    //                    // Get the access token to attach it to an API request.
+    //                    let accessToken = user.accessToken.tokenString
+    //
+    //                    // Initialize the Gmail service
+    //                    let service = GTLRGmailService()
+    //                    service.authorizer = user.fetcherAuthorizer
+    //
+    //                    // Create a Gmail API request
+    //                    let query = GTLRGmailQuery_UsersMessagesList.query(withUserId: "me")
+    //                    query.q = "is:unread"
+    //
+    //                    service.executeQuery(query) { ticket, result, error in
+    //                        // Handle the API response
+    //                        if error == nil, let messages = (result as? GTLRGmail_ListMessagesResponse)?.messages {
+    //                            // Process the list of unread messages
+    //                            for message in messages {
+    //                                if let messageId = message.identifier {
+    //                                    print("Unread message ID: \(messageId)")
+    //                                }
+    //                            }
+    //                        } else {
+    //                            print("Error fetching unread messages: \(error?.localizedDescription ?? "Unknown error")")
+    //                        }
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
     
     @objc func btnSignInAction(){
         
@@ -140,7 +140,7 @@ class ViewController: UIViewController {
             
             guard error == nil else { return }
             
-         
+            
             print(signInResult?.user.profile?.name)
             
             
@@ -149,10 +149,10 @@ class ViewController: UIViewController {
                 
                 print("FALSE ===== 1111")
                 
-          
+                
                 let driveScope = "https://www.googleapis.com/auth/gmail.modify"
                 
-       
+                
                 let grantedScopes = user.grantedScopes
                 let service = GTLRGmailService()
                 // Modify the scopes to include Gmail API scopes
@@ -162,9 +162,9 @@ class ViewController: UIViewController {
                 
                 if grantedScopes == nil || !grantedScopes!.contains(driveScope) {
                     
-                  //  let additionalScopes = ["https://www.googleapis.com/auth/gmail.readonly"]
+                    //  let additionalScopes = ["https://www.googleapis.com/auth/gmail.readonly"]
                     let additionalScopes = ["https://www.googleapis.com/auth/gmail.readonly", "https://www.googleapis.com/auth/gmail.modify"]
-
+                    
                     guard let currentUser = GIDSignIn.sharedInstance.currentUser else {
                         return ;  /* Not signed in. */
                     }
@@ -227,7 +227,7 @@ class ViewController: UIViewController {
                 // Update UI or perform other actions
             }
             
-        
+            
         }
         self.btnSignIn.alpha = 0
         self.btnSignOut.alpha = 1
@@ -249,69 +249,69 @@ class ViewController: UIViewController {
     
     //MARK: Fethinf Message working
     
-//    func fetchInboxMessages(pageToken: String? = nil) {
-//        guard let service = gmailService else {
-//            print("Gmail service not configured")
-//            return
-//        }
-//
-//        let query = GTLRGmailQuery_UsersMessagesList.query(withUserId: "me")
-//        query.pageToken = pageToken // Set the page token for pagination
-//
-//        service.executeQuery(query) { [weak self] (ticket, response, error) in
-//            guard let self = self else {
-//                return
-//            }
-//
-//            if let error = error {
-//                print("Error fetching inbox messages: \(error.localizedDescription)")
-//                return
-//            }
-//
-//            if let messagesResponse = response as? GTLRGmail_ListMessagesResponse,
-//               let messages = messagesResponse.messages {
-//                print("Fetched count \(messages.count) inbox email messages")
-//
-//                // Create a batch query to fetch message details for this page
-//                let batchQuery = GTLRBatchQuery()
-//                for message in messages {
-//                    let messageQuery = GTLRGmailQuery_UsersMessagesGet.query(withUserId: "me", identifier: message.identifier!)
-//                    messageQuery.format = kGTLRGmailFormatFull
-//                    batchQuery.addQuery(messageQuery)
-//                }
-//
-//                service.executeQuery(batchQuery) { (ticket, response, error) in
-//                    if let error = error {
-//                        print("Error fetching message details: \(error.localizedDescription)")
-//                        return
-//                    }
-//
-//                    if let batchResult = response as? [String: GTLRObject] {
-//                        for (_, result) in batchResult {
-//                            if let message = result as? GTLRGmail_Message {
-//                                if let payload = message.payload, let headers = payload.headers {
-//                                    for header in headers {
-//                                        if header.name?.lowercased() == "subject" {
-//                                            print("Message Subject: \(header.value ?? "")")
-//                                            break
-//                                        }
-//                                    }
-//                                }
-//                            }
-//                        }
-//                    }
-//
-//                    // Fetch the next page if available
-//                    if let nextPageToken = messagesResponse.nextPageToken {
-//                        self.fetchInboxMessages(pageToken: nextPageToken)
-//                    }
-//                }
-//            }
-//        }
-//    }
+    //    func fetchInboxMessages(pageToken: String? = nil) {
+    //        guard let service = gmailService else {
+    //            print("Gmail service not configured")
+    //            return
+    //        }
+    //
+    //        let query = GTLRGmailQuery_UsersMessagesList.query(withUserId: "me")
+    //        query.pageToken = pageToken // Set the page token for pagination
+    //
+    //        service.executeQuery(query) { [weak self] (ticket, response, error) in
+    //            guard let self = self else {
+    //                return
+    //            }
+    //
+    //            if let error = error {
+    //                print("Error fetching inbox messages: \(error.localizedDescription)")
+    //                return
+    //            }
+    //
+    //            if let messagesResponse = response as? GTLRGmail_ListMessagesResponse,
+    //               let messages = messagesResponse.messages {
+    //                print("Fetched count \(messages.count) inbox email messages")
+    //
+    //                // Create a batch query to fetch message details for this page
+    //                let batchQuery = GTLRBatchQuery()
+    //                for message in messages {
+    //                    let messageQuery = GTLRGmailQuery_UsersMessagesGet.query(withUserId: "me", identifier: message.identifier!)
+    //                    messageQuery.format = kGTLRGmailFormatFull
+    //                    batchQuery.addQuery(messageQuery)
+    //                }
+    //
+    //                service.executeQuery(batchQuery) { (ticket, response, error) in
+    //                    if let error = error {
+    //                        print("Error fetching message details: \(error.localizedDescription)")
+    //                        return
+    //                    }
+    //
+    //                    if let batchResult = response as? [String: GTLRObject] {
+    //                        for (_, result) in batchResult {
+    //                            if let message = result as? GTLRGmail_Message {
+    //                                if let payload = message.payload, let headers = payload.headers {
+    //                                    for header in headers {
+    //                                        if header.name?.lowercased() == "subject" {
+    //                                            print("Message Subject: \(header.value ?? "")")
+    //                                            break
+    //                                        }
+    //                                    }
+    //                                }
+    //                            }
+    //                        }
+    //                    }
+    //
+    //                    // Fetch the next page if available
+    //                    if let nextPageToken = messagesResponse.nextPageToken {
+    //                        self.fetchInboxMessages(pageToken: nextPageToken)
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
     
     // MARK: Testing func and working
-  
+    
     func fetchInboxMessages(pageToken: String? = nil) {
         guard let service = gmailService else {
             print("Gmail service not configured")
@@ -338,7 +338,7 @@ class ViewController: UIViewController {
                     
                     print(message)
                     
-                //    self.fetchMessageDetails(messageId: message.identifier!)
+                    //    self.fetchMessageDetails(messageId: message.identifier!)
                     
                     self.deleteMessage(messageId: message.identifier!)
                 }
@@ -372,74 +372,74 @@ class ViewController: UIViewController {
                 return
             }
             
-//            if let message = response as? GTLRGmail_Message {
-//                if let headers = message.payload?.headers {
-//                    let sender = self.getHeaderValue(headers, "From") ?? "Unknown"
-//                    let receiver = self.getHeaderValue(headers, "To") ?? "Unknown"
-//                    let subject = self.getHeaderValue(headers, "Subject") ?? "No Subject"
-//                    print("Sender: \(sender)")
-//                    print("Receiver: \(receiver)")
-//                    print("Subject: \(subject)")
-//
-//
-//                }
-//
-//                if let body = message.payload?.body?.data {
-//                    if let decodedBody = Data(base64Encoded: body) {
-//                        if let bodyString = String(data: decodedBody, encoding: .utf8) {
-//                            print("Message Body: \(bodyString)")
-//                        }
-//                    }
-//                }
-//
-//                // Handle other parts of the message as needed
-//            }
+            //            if let message = response as? GTLRGmail_Message {
+            //                if let headers = message.payload?.headers {
+            //                    let sender = self.getHeaderValue(headers, "From") ?? "Unknown"
+            //                    let receiver = self.getHeaderValue(headers, "To") ?? "Unknown"
+            //                    let subject = self.getHeaderValue(headers, "Subject") ?? "No Subject"
+            //                    print("Sender: \(sender)")
+            //                    print("Receiver: \(receiver)")
+            //                    print("Subject: \(subject)")
+            //
+            //
+            //                }
+            //
+            //                if let body = message.payload?.body?.data {
+            //                    if let decodedBody = Data(base64Encoded: body) {
+            //                        if let bodyString = String(data: decodedBody, encoding: .utf8) {
+            //                            print("Message Body: \(bodyString)")
+            //                        }
+            //                    }
+            //                }
+            //
+            //                // Handle other parts of the message as needed
+            //            }
             if let message = response as? GTLRGmail_Message {
-                      self.allMessages.append(message) // Store the entire message object
-                      
-                      // Print all available fields and metadata
-                      if let id = message.identifier {
-                          print("Message ID: \(id)")
-                      }
-                      if let snippet = message.snippet {
-                          print("Snippet: \(snippet)")
-                      }
-                      if let internalDate = message.internalDate {
-                          print("Internal Date: \(internalDate)")
-                      }
-                      // ... Print other fields as needed
-                      
-                      if let payload = message.payload {
-                          if let headers = payload.headers {
-                              for header in headers {
-                                  if let name = header.name, let value = header.value {
-                                      print("Header - \(name): \(value)")
-                                  }
-                              }
-                          }
-                          if let mimeType = payload.mimeType {
-                              print("MIME Type: \(mimeType)")
-                          }
-                          if let filename = payload.filename {
-                              print("Filename: \(filename)")
-                          }
-                          // ... Print other payload details as needed
-                          
-                          if let bodyParts = payload.parts {
-                                           for part in bodyParts {
-                                               if let partBodyData = part.body?.data {
-                                                   if let decodedBody = Data(base64Encoded: partBodyData) {
-                                                       if let bodyString = String(data: decodedBody, encoding: .utf8) {
-                                                           print("Message Body: \(bodyString)")
-                                                       }
-                                                   }
-                                               }
-                                           }
-                                       }
-                      }
-                      
-                      // Handle other parts of the message as needed
-                  }
+                self.allMessages.append(message) // Store the entire message object
+                
+                // Print all available fields and metadata
+                if let id = message.identifier {
+                    print("Message ID: \(id)")
+                }
+                if let snippet = message.snippet {
+                    print("Snippet: \(snippet)")
+                }
+                if let internalDate = message.internalDate {
+                    print("Internal Date: \(internalDate)")
+                }
+                // ... Print other fields as needed
+                
+                if let payload = message.payload {
+                    if let headers = payload.headers {
+                        for header in headers {
+                            if let name = header.name, let value = header.value {
+                                print("Header - \(name): \(value)")
+                            }
+                        }
+                    }
+                    if let mimeType = payload.mimeType {
+                        print("MIME Type: \(mimeType)")
+                    }
+                    if let filename = payload.filename {
+                        print("Filename: \(filename)")
+                    }
+                    // ... Print other payload details as needed
+                    
+                    if let bodyParts = payload.parts {
+                        for part in bodyParts {
+                            if let partBodyData = part.body?.data {
+                                if let decodedBody = Data(base64Encoded: partBodyData) {
+                                    if let bodyString = String(data: decodedBody, encoding: .utf8) {
+                                        print("Message Body: \(bodyString)")
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                // Handle other parts of the message as needed
+            }
             
             
         }
@@ -470,43 +470,43 @@ class ViewController: UIViewController {
     }
     
     
-//    func fetchMessageDetails(messageId: String) {
-//        guard let service = gmailService else {
-//            print("Gmail service not configured")
-//            return
-//        }
-//
-//        let messageQuery = GTLRGmailQuery_UsersMessagesGet.query(withUserId: "me", identifier: messageId)
-//        messageQuery.format = kGTLRGmailFormatFull
-//
-//        service.executeQuery(messageQuery) { (ticket, response, error) in
-//            if let error = error {
-//                print("Error fetching message details: \(error.localizedDescription)")
-//                return
-//            }
-//
-//            if let message = response as? GTLRGmail_Message {
-//                if let headers = message.payload?.headers {
-//                    for header in headers {
-//                        print("\(header.name!): \(header.value!)")
-//                    }
-//                }
-//
-//                if let body = message.payload?.body?.data {
-//                    if let decodedBody = Data(base64Encoded: body) {
-//                        if let bodyString = String(data: decodedBody, encoding: .utf8) {
-//                            print("Message Body: \(bodyString)")
-//                        }
-//                    }
-//                }
-//
-//                // Handle other parts of the message as needed
-//            }
-//        }
-//    }
-
-
-
+    //    func fetchMessageDetails(messageId: String) {
+    //        guard let service = gmailService else {
+    //            print("Gmail service not configured")
+    //            return
+    //        }
+    //
+    //        let messageQuery = GTLRGmailQuery_UsersMessagesGet.query(withUserId: "me", identifier: messageId)
+    //        messageQuery.format = kGTLRGmailFormatFull
+    //
+    //        service.executeQuery(messageQuery) { (ticket, response, error) in
+    //            if let error = error {
+    //                print("Error fetching message details: \(error.localizedDescription)")
+    //                return
+    //            }
+    //
+    //            if let message = response as? GTLRGmail_Message {
+    //                if let headers = message.payload?.headers {
+    //                    for header in headers {
+    //                        print("\(header.name!): \(header.value!)")
+    //                    }
+    //                }
+    //
+    //                if let body = message.payload?.body?.data {
+    //                    if let decodedBody = Data(base64Encoded: body) {
+    //                        if let bodyString = String(data: decodedBody, encoding: .utf8) {
+    //                            print("Message Body: \(bodyString)")
+    //                        }
+    //                    }
+    //                }
+    //
+    //                // Handle other parts of the message as needed
+    //            }
+    //        }
+    //    }
+    
+    
+    
     
     
     //working
