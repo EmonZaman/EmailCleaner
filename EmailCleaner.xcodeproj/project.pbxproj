@@ -1,0 +1,485 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0A5E9B2734D6C3EEBF7FF709 /* Pods_EmailCleaner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A480EE51955F549D91CE3CF2 /* Pods_EmailCleaner.framework */; };
+		FE5CEAB52A8C963300F61FEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5CEAB42A8C963300F61FEC /* AppDelegate.swift */; };
+		FE5CEAB72A8C963300F61FEC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5CEAB62A8C963300F61FEC /* SceneDelegate.swift */; };
+		FE5CEAB92A8C963300F61FEC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5CEAB82A8C963300F61FEC /* ViewController.swift */; };
+		FE5CEABC2A8C963300F61FEC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE5CEABA2A8C963300F61FEC /* Main.storyboard */; };
+		FE5CEABF2A8C963300F61FEC /* EmailCleaner.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FE5CEABD2A8C963300F61FEC /* EmailCleaner.xcdatamodeld */; };
+		FE5CEAC12A8C963400F61FEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE5CEAC02A8C963400F61FEC /* Assets.xcassets */; };
+		FE5CEAC42A8C963400F61FEC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE5CEAC22A8C963400F61FEC /* LaunchScreen.storyboard */; };
+		FE5CEAD72A8CA1C100F61FEC /* MailCore2 in Frameworks */ = {isa = PBXBuildFile; productRef = FE5CEAD62A8CA1C100F61FEC /* MailCore2 */; };
+		FE89E1512A947CB20005C0B3 /* GmailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE89E1502A947CB20005C0B3 /* GmailService.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A480EE51955F549D91CE3CF2 /* Pods_EmailCleaner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EmailCleaner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF9C5E9F230F4903CC24B680 /* Pods-EmailCleaner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmailCleaner.debug.xcconfig"; path = "Target Support Files/Pods-EmailCleaner/Pods-EmailCleaner.debug.xcconfig"; sourceTree = "<group>"; };
+		E16ABA4EEC0CAD7D0363F140 /* Pods-EmailCleaner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmailCleaner.release.xcconfig"; path = "Target Support Files/Pods-EmailCleaner/Pods-EmailCleaner.release.xcconfig"; sourceTree = "<group>"; };
+		FE5CEAB12A8C963300F61FEC /* EmailCleaner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmailCleaner.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE5CEAB42A8C963300F61FEC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		FE5CEAB62A8C963300F61FEC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		FE5CEAB82A8C963300F61FEC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FE5CEABB2A8C963300F61FEC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FE5CEABE2A8C963300F61FEC /* EmailCleaner.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EmailCleaner.xcdatamodel; sourceTree = "<group>"; };
+		FE5CEAC02A8C963400F61FEC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FE5CEAC32A8C963400F61FEC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FE5CEAC52A8C963400F61FEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FE5CEAD42A8CA05D00F61FEC /* EmailCleaner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EmailCleaner-Bridging-Header.h"; sourceTree = "<group>"; };
+		FE89E1502A947CB20005C0B3 /* GmailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GmailService.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FE5CEAAE2A8C963300F61FEC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE5CEAD72A8CA1C100F61FEC /* MailCore2 in Frameworks */,
+				0A5E9B2734D6C3EEBF7FF709 /* Pods_EmailCleaner.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		461A1B39063A27EEDF365F59 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CF9C5E9F230F4903CC24B680 /* Pods-EmailCleaner.debug.xcconfig */,
+				E16ABA4EEC0CAD7D0363F140 /* Pods-EmailCleaner.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		B25EFCB59B3B1C6A1EE38CD1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A480EE51955F549D91CE3CF2 /* Pods_EmailCleaner.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FE5CEAA82A8C963300F61FEC = {
+			isa = PBXGroup;
+			children = (
+				FE5CEAD42A8CA05D00F61FEC /* EmailCleaner-Bridging-Header.h */,
+				FE5CEAB32A8C963300F61FEC /* EmailCleaner */,
+				FE5CEAB22A8C963300F61FEC /* Products */,
+				461A1B39063A27EEDF365F59 /* Pods */,
+				B25EFCB59B3B1C6A1EE38CD1 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		FE5CEAB22A8C963300F61FEC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FE5CEAB12A8C963300F61FEC /* EmailCleaner.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FE5CEAB32A8C963300F61FEC /* EmailCleaner */ = {
+			isa = PBXGroup;
+			children = (
+				FE5CEAB42A8C963300F61FEC /* AppDelegate.swift */,
+				FE5CEAB62A8C963300F61FEC /* SceneDelegate.swift */,
+				FE5CEAB82A8C963300F61FEC /* ViewController.swift */,
+				FE5CEABA2A8C963300F61FEC /* Main.storyboard */,
+				FE5CEAC02A8C963400F61FEC /* Assets.xcassets */,
+				FE5CEAC22A8C963400F61FEC /* LaunchScreen.storyboard */,
+				FE5CEAC52A8C963400F61FEC /* Info.plist */,
+				FE5CEABD2A8C963300F61FEC /* EmailCleaner.xcdatamodeld */,
+				FE89E1502A947CB20005C0B3 /* GmailService.swift */,
+			);
+			path = EmailCleaner;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FE5CEAB02A8C963300F61FEC /* EmailCleaner */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FE5CEAC82A8C963400F61FEC /* Build configuration list for PBXNativeTarget "EmailCleaner" */;
+			buildPhases = (
+				10DBA970F12ADCDB34E4BD2E /* [CP] Check Pods Manifest.lock */,
+				FE5CEAAD2A8C963300F61FEC /* Sources */,
+				FE5CEAAE2A8C963300F61FEC /* Frameworks */,
+				FE5CEAAF2A8C963300F61FEC /* Resources */,
+				3453E9B6ABEDEDD3CF2FDD4B /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = EmailCleaner;
+			packageProductDependencies = (
+				FE5CEAD62A8CA1C100F61FEC /* MailCore2 */,
+			);
+			productName = EmailCleaner;
+			productReference = FE5CEAB12A8C963300F61FEC /* EmailCleaner.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FE5CEAA92A8C963300F61FEC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1430;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					FE5CEAB02A8C963300F61FEC = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
+				};
+			};
+			buildConfigurationList = FE5CEAAC2A8C963300F61FEC /* Build configuration list for PBXProject "EmailCleaner" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FE5CEAA82A8C963300F61FEC;
+			packageReferences = (
+				FE5CEAD52A8CA1C100F61FEC /* XCRemoteSwiftPackageReference "mailcore2" */,
+			);
+			productRefGroup = FE5CEAB22A8C963300F61FEC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FE5CEAB02A8C963300F61FEC /* EmailCleaner */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FE5CEAAF2A8C963300F61FEC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE5CEAC42A8C963400F61FEC /* LaunchScreen.storyboard in Resources */,
+				FE5CEAC12A8C963400F61FEC /* Assets.xcassets in Resources */,
+				FE5CEABC2A8C963300F61FEC /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		10DBA970F12ADCDB34E4BD2E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-EmailCleaner-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3453E9B6ABEDEDD3CF2FDD4B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EmailCleaner/Pods-EmailCleaner-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EmailCleaner/Pods-EmailCleaner-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EmailCleaner/Pods-EmailCleaner-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FE5CEAAD2A8C963300F61FEC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE5CEAB92A8C963300F61FEC /* ViewController.swift in Sources */,
+				FE5CEAB52A8C963300F61FEC /* AppDelegate.swift in Sources */,
+				FE5CEAB72A8C963300F61FEC /* SceneDelegate.swift in Sources */,
+				FE5CEABF2A8C963300F61FEC /* EmailCleaner.xcdatamodeld in Sources */,
+				FE89E1512A947CB20005C0B3 /* GmailService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		FE5CEABA2A8C963300F61FEC /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FE5CEABB2A8C963300F61FEC /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		FE5CEAC22A8C963400F61FEC /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FE5CEAC32A8C963400F61FEC /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FE5CEAC62A8C963400F61FEC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "EmailCleaner-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		FE5CEAC72A8C963400F61FEC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OBJC_BRIDGING_HEADER = "EmailCleaner-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FE5CEAC92A8C963400F61FEC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CF9C5E9F230F4903CC24B680 /* Pods-EmailCleaner.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 92L57X7YGH;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = EmailCleaner/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kabir.EmailCleaner;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FE5CEACA2A8C963400F61FEC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E16ABA4EEC0CAD7D0363F140 /* Pods-EmailCleaner.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 92L57X7YGH;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = EmailCleaner/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kabir.EmailCleaner;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FE5CEAAC2A8C963300F61FEC /* Build configuration list for PBXProject "EmailCleaner" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FE5CEAC62A8C963400F61FEC /* Debug */,
+				FE5CEAC72A8C963400F61FEC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FE5CEAC82A8C963400F61FEC /* Build configuration list for PBXNativeTarget "EmailCleaner" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FE5CEAC92A8C963400F61FEC /* Debug */,
+				FE5CEACA2A8C963400F61FEC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FE5CEAD52A8CA1C100F61FEC /* XCRemoteSwiftPackageReference "mailcore2" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MailCore/mailcore2";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FE5CEAD62A8CA1C100F61FEC /* MailCore2 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FE5CEAD52A8CA1C100F61FEC /* XCRemoteSwiftPackageReference "mailcore2" */;
+			productName = MailCore2;
+		};
+/* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		FE5CEABD2A8C963300F61FEC /* EmailCleaner.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				FE5CEABE2A8C963300F61FEC /* EmailCleaner.xcdatamodel */,
+			);
+			currentVersion = FE5CEABE2A8C963300F61FEC /* EmailCleaner.xcdatamodel */;
+			path = EmailCleaner.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = FE5CEAA92A8C963300F61FEC /* Project object */;
+}
