@@ -3,4 +3,54 @@
    uuid = "7A65AC00-478E-4354-99F1-8FEB6BE0F3BC"
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6FC1382B-AD18-440C-A0DB-AE53DE68CF77"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EmailCleaner/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "294"
+            endingLineNumber = "294"
+            landmarkName = "fetchInboxMessages(pageToken:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "6FC1382B-AD18-440C-A0DB-AE53DE68CF77 - cedd54fb6cdbaee5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "EmailCleaner.ViewController.fetchInboxMessages(pageToken: Swift.Optional&lt;Swift.String&gt;) -&gt; ()"
+                  moduleName = "EmailCleaner"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/twinbitltd02/Desktop/ML/EmailCleaner/EmailCleaner/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "294"
+                  endingLineNumber = "294"
+                  offsetFromSymbolStart = "92">
+               </Location>
+               <Location
+                  uuid = "6FC1382B-AD18-440C-A0DB-AE53DE68CF77 - cedd54fb6cdbaec6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "EmailCleaner.ViewController.fetchInboxMessages(pageToken: Swift.Optional&lt;Swift.String&gt;) -&gt; ()"
+                  moduleName = "EmailCleaner"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/twinbitltd02/Desktop/ML/EmailCleaner/EmailCleaner/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "295"
+                  endingLineNumber = "295"
+                  offsetFromSymbolStart = "92">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

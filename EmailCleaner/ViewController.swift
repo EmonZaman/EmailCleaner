@@ -34,6 +34,10 @@ class ViewController: UIViewController {
         
         let message: GTLRGmail_Message
         let category: Category
+        let messageReceivedDate: String?
+        let isRead: Bool?
+        let isHasAttachment: Bool?
+        
     }
     
     
@@ -221,7 +225,7 @@ class ViewController: UIViewController {
     }
     
     
-    //MARK: Fethching Message working
+    //MARK: Fetching Message working
     
     //    func fetchInboxMessages(pageToken: String? = nil) {
     //        guard let service = gmailService else {
@@ -287,6 +291,7 @@ class ViewController: UIViewController {
     // MARK: Testing func and working
     
     func fetchInboxMessages(pageToken: String? = nil) {
+        
         guard let service = gmailService else {
             print("Gmail service not configured")
             return
@@ -299,7 +304,7 @@ class ViewController: UIViewController {
         //   query.labelIds = ["INBOX", "CATEGORY_PROMOTIONS", "CATEGORY_SOCIAL", "CATEGORY_UPDATES", "CATEGORY_FORUMS", "SENT", "DRAFT", "SPAM", "TRASH"]
         query.pageToken = pageToken // Set the page token for pagination
         
-        //    query.q = "is:unread"
+        //   query.q = "is:unread"
         //   query.q = "has:attachment"
         
         query.labelIds = ["SENT"]
@@ -323,7 +328,7 @@ class ViewController: UIViewController {
                     
                     //   print(message)
                     
-                    //    self.fetchMessageDetails(messageId: message.identifier!)
+                        self.fetchMessageDetails(messageId: message.identifier!)
                     
                     //  self.deleteMessage(messageId: message.identifier!)
                 }
@@ -338,7 +343,12 @@ class ViewController: UIViewController {
             }
         }
     }
+    
+    
+      //MARK: Message Details
     func fetchMessageDetails(messageId: String) {
+        
+    
         guard let service = gmailService else {
             print("Gmail service not configured")
             return
@@ -347,16 +357,16 @@ class ViewController: UIViewController {
             self.deleteMessage(messageId: messageId)
             i += 1
         }
-        
+
         let messageQuery = GTLRGmailQuery_UsersMessagesGet.query(withUserId: "me", identifier: messageId)
         messageQuery.format = kGTLRGmailFormatFull
-        
+
         service.executeQuery(messageQuery) { (ticket, response, error) in
             if let error = error {
                 print("Error fetching message details: \(error.localizedDescription)")
                 return
             }
-            
+
             //            if let message = response as? GTLRGmail_Message {
             //                if let headers = message.payload?.headers {
             //                    let sender = self.getHeaderValue(headers, "From") ?? "Unknown"
@@ -381,7 +391,7 @@ class ViewController: UIViewController {
             //            }
             if let message = response as? GTLRGmail_Message {
                 self.allMessages.append(message) // Store the entire message object
-                
+
                 // Print all available fields and metadata
                 if let id = message.identifier {
                     print("Message ID: \(id)")
@@ -391,15 +401,60 @@ class ViewController: UIViewController {
                 }
                 if let internalDate = message.internalDate {
                     print("Internal Date: \(internalDate)")
+                    
                 }
-                // ... Print other fields as needed
                 
+                // Check if the message is read or not
+                if let labelIds = message.labelIds {
+                    if labelIds.contains("UNREAD") {
+                        print("Status: Unread")
+                    } else {
+                        print("Status: Read")
+                    }
+                }
+        
+                //   query.labelIds = ["INBOX", "CATEGORY_PROMOTIONS", "CATEGORY_SOCIAL", "CATEGORY_UPDATES", "CATEGORY_FORUMS", "SENT", "DRAFT", "SPAM", "TRASH"]
+                
+                if let labelIds = message.labelIds {
+                     if labelIds.contains("INBOX") {
+                         print("Category: Inbox")
+                     }
+                     if labelIds.contains("CATEGORY_PROMOTIONS") {
+                         print("Category: Promotions")
+                     }
+                     if labelIds.contains("CATEGORY_SOCIAL") {
+                         print("Category: Social")
+                     }
+                    if labelIds.contains("CATEGORY_UPDATES") {
+                        print("Category: Update")
+                    }
+                    if labelIds.contains("CATEGORY_FORUMS") {
+                        print("Category: Forums")
+                    }
+                    if labelIds.contains("DRAFT") {
+                        print("Category: Draft")
+                    }
+                    if labelIds.contains("SENT") {
+                        print("Category: Sent")
+                    }
+                    if labelIds.contains("SPAM") {
+                        print("Category: Spam")
+                    }
+                    if labelIds.contains("TRASH") {
+                        print("Category: Trash")
+                    }
+                     // Add more category checks as needed
+                 }
+                // ... Print other fields as needed
+
                 if let payload = message.payload {
                     if let headers = payload.headers {
                         for header in headers {
                             if let name = header.name, let value = header.value {
                                 print("Header - \(name): \(value)")
-                            }
+                                // Check for message category
+                                                            }
+                            
                         }
                     }
                     if let mimeType = payload.mimeType {
@@ -408,8 +463,18 @@ class ViewController: UIViewController {
                     if let filename = payload.filename {
                         print("Filename: \(filename)")
                     }
-                    // ... Print other payload details as needed
+                
                     
+                    if let parts = payload.parts {
+                        for part in parts {
+                            if let filename = part.filename, let mimeType = part.mimeType {
+                                print("Attachment: \(filename), Mime Type: \(mimeType)")
+                                
+                            }
+                        }
+                    }
+                    // ... Print other payload details as needed
+
                     if let bodyParts = payload.parts {
                         for part in bodyParts {
                             if let partBodyData = part.body?.data {
@@ -422,15 +487,20 @@ class ViewController: UIViewController {
                         }
                     }
                 }
-                
+
                 // Handle other parts of the message as needed
             }
-            
-            
+
+
         }
-        
-        
+
+
     }
+    
+    
+    //MARK: Fetch Message Details test
+
+    
     func getHeaderValue(_ headers: [GTLRGmail_MessagePartHeader]?, _ name: String) -> String? {
         return headers?.first(where: { $0.name?.lowercased() == name.lowercased() })?.value
     }
