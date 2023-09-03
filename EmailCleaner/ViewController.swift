@@ -307,7 +307,7 @@ class ViewController: UIViewController {
         //   query.q = "is:unread"
         //   query.q = "has:attachment"
         
-        query.labelIds = ["SENT"]
+        query.labelIds = ["TRASH"]
         query.pageToken = pageToken // Set the page token for pagination
         
         service.executeQuery(query) { [weak self] (ticket, response, error) in
@@ -416,15 +416,15 @@ class ViewController: UIViewController {
                 //   query.labelIds = ["INBOX", "CATEGORY_PROMOTIONS", "CATEGORY_SOCIAL", "CATEGORY_UPDATES", "CATEGORY_FORUMS", "SENT", "DRAFT", "SPAM", "TRASH"]
                 
                 if let labelIds = message.labelIds {
-                     if labelIds.contains("INBOX") {
-                         print("Category: Inbox")
-                     }
-                     if labelIds.contains("CATEGORY_PROMOTIONS") {
-                         print("Category: Promotions")
-                     }
-                     if labelIds.contains("CATEGORY_SOCIAL") {
-                         print("Category: Social")
-                     }
+                    if labelIds.contains("INBOX") {
+                        print("Category: Inbox")
+                    }
+                    if labelIds.contains("CATEGORY_PROMOTIONS") {
+                        print("Category: Promotions")
+                    }
+                    if labelIds.contains("CATEGORY_SOCIAL") {
+                        print("Category: Social")
+                    }
                     if labelIds.contains("CATEGORY_UPDATES") {
                         print("Category: Update")
                     }
@@ -443,8 +443,8 @@ class ViewController: UIViewController {
                     if labelIds.contains("TRASH") {
                         print("Category: Trash")
                     }
-                     // Add more category checks as needed
-                 }
+                    // Add more category checks as needed
+                }
                 // ... Print other fields as needed
 
                 if let payload = message.payload {
@@ -464,15 +464,58 @@ class ViewController: UIViewController {
                         print("Filename: \(filename)")
                     }
                 
-                    
-                    if let parts = payload.parts {
-                        for part in parts {
-                            if let filename = part.filename, let mimeType = part.mimeType {
-                                print("Attachment: \(filename), Mime Type: \(mimeType)")
-                                
+//
+//                    if let parts = payload.parts {
+//                        for part in parts {
+//                            if let filename = part.filename, let mimeType = part.mimeType {
+//                                print("Attachment: \(filename), Mime Type: \(mimeType)")
+//
+//                            }
+//                        }
+//                    }
+                    // ... (Your existing code)
+
+                    if let payload = message.payload {
+                        // Rest of your payload processing code
+
+                        // Check for attachments
+                        if let parts = payload.parts {
+                            for part in parts {
+                                if let filename = part.filename, let mimeType = part.mimeType {
+                                    // Check if the part has an attachment ID
+                                    if let body = part.body, let attachmentId = body.attachmentId {
+                                        print("Attachment: \(filename), Mime Type: \(mimeType), Attachment ID: \(attachmentId)")
+
+                                        // Fetch attachment data using attachmentId
+                                        if let attachmentData = self.fetchAttachmentData(service: service, messageId: message.identifier ?? "", attachmentId: attachmentId) {
+                                            // Save attachment to document directory
+                                            if let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+                                                let fileURL = documentsDirectory.appendingPathComponent(filename)
+                                                do {
+                                                    try attachmentData.write(to: fileURL)
+                                                    print("Attachment saved to: \(fileURL)")
+                                                } catch {
+                                                    print("Error saving attachment: \(error.localizedDescription)")
+                                                }
+                                            }
+                                        }
+                                    } else {
+                                        print("Attachment without attachmentId: \(filename), Mime Type: \(mimeType)")
+                                        
+                                        // Handling attachments without attachmentId
+                                        // You might need to extract the attachment data from the `part.body.data` in this case.
+                                        // Save the extracted data to the document directory.
+                                    }
+                                }
                             }
                         }
                     }
+
+                    // ... (Rest of your code)
+
+                    
+                    
+                    
                     // ... Print other payload details as needed
 
                     if let bodyParts = payload.parts {
@@ -499,6 +542,38 @@ class ViewController: UIViewController {
     
     
     //MARK: Fetch Message Details test
+    
+    func fetchAttachmentData(service: GTLRGmailService, messageId: String, attachmentId: String) -> Data? {
+        let attachmentQuery = GTLRGmailQuery_UsersMessagesAttachmentsGet.query(withUserId: "me", messageId: messageId, identifier: attachmentId)
+        
+        var attachmentData: Data?
+        
+        let semaphore = DispatchSemaphore(value: 0)
+        
+        service.executeQuery(attachmentQuery) { (ticket, response, error) in
+            if let error = error {
+                print("Error fetching attachment data: \(error.localizedDescription)")
+                semaphore.signal()
+                return
+            }
+            
+            if let attachment = response as? GTLRGmail_MessagePartBody {
+                if let attachmentBase64 = attachment.data, let data = Data(base64Encoded: attachmentBase64, options: .ignoreUnknownCharacters) {
+                    attachmentData = data
+                }
+            }
+            
+            semaphore.signal()
+        }
+        
+        _ = semaphore.wait(timeout: .distantFuture)
+        
+        return attachmentData
+        
+    }
+
+
+
 
     
     func getHeaderValue(_ headers: [GTLRGmail_MessagePartHeader]?, _ name: String) -> String? {

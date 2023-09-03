@@ -7,49 +7,81 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "6FC1382B-AD18-440C-A0DB-AE53DE68CF77"
+            uuid = "F005BFEC-D6B6-4221-99A3-B97C00F11D3D"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EmailCleaner/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "294"
-            endingLineNumber = "294"
-            landmarkName = "fetchInboxMessages(pageToken:)"
+            startingLineNumber = "572"
+            endingLineNumber = "572"
+            landmarkName = "fetchAttachmentData(service:messageId:attachmentId:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9B46D18B-4197-44F4-9799-9D29A71B9AB4"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EmailCleaner/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "549"
+            endingLineNumber = "549"
+            landmarkName = "fetchAttachmentData(service:messageId:attachmentId:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "6FC1382B-AD18-440C-A0DB-AE53DE68CF77 - cedd54fb6cdbaee5"
+                  uuid = "9B46D18B-4197-44F4-9799-9D29A71B9AB4 - edec8684acba57f"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "EmailCleaner.ViewController.fetchInboxMessages(pageToken: Swift.Optional&lt;Swift.String&gt;) -&gt; ()"
+                  symbolName = "EmailCleaner.ViewController.fetchAttachmentData(service: __C.GTLRGmailService, messageId: Swift.String, attachmentId: Swift.String) -&gt; Swift.Optional&lt;Foundation.Data&gt;"
                   moduleName = "EmailCleaner"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/twinbitltd02/Desktop/ML/EmailCleaner/EmailCleaner/ViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "294"
-                  endingLineNumber = "294"
-                  offsetFromSymbolStart = "92">
+                  startingLineNumber = "548"
+                  endingLineNumber = "548"
+                  offsetFromSymbolStart = "632">
                </Location>
                <Location
-                  uuid = "6FC1382B-AD18-440C-A0DB-AE53DE68CF77 - cedd54fb6cdbaec6"
+                  uuid = "9B46D18B-4197-44F4-9799-9D29A71B9AB4 - 1bbb548556a24dba"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "EmailCleaner.ViewController.fetchInboxMessages(pageToken: Swift.Optional&lt;Swift.String&gt;) -&gt; ()"
+                  symbolName = "closure #1 (__C.GTLRServiceTicket, Swift.Optional&lt;Any&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in EmailCleaner.ViewController.fetchAttachmentData(service: __C.GTLRGmailService, messageId: Swift.String, attachmentId: Swift.String) -&gt; Swift.Optional&lt;Foundation.Data&gt;"
                   moduleName = "EmailCleaner"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/twinbitltd02/Desktop/ML/EmailCleaner/EmailCleaner/ViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "295"
-                  endingLineNumber = "295"
-                  offsetFromSymbolStart = "92">
+                  startingLineNumber = "548"
+                  endingLineNumber = "548"
+                  offsetFromSymbolStart = "136">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D3C66B02-B7C2-4D62-84AD-B64A7E201AD2"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EmailCleaner/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "571"
+            endingLineNumber = "571"
+            landmarkName = "fetchAttachmentData(service:messageId:attachmentId:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
