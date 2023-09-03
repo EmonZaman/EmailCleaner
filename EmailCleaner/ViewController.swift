@@ -307,7 +307,7 @@ class ViewController: UIViewController {
         //   query.q = "is:unread"
         //   query.q = "has:attachment"
         
-        query.labelIds = ["TRASH"]
+        query.labelIds = ["SENT"]
         query.pageToken = pageToken // Set the page token for pagination
         
         service.executeQuery(query) { [weak self] (ticket, response, error) in
@@ -347,6 +347,8 @@ class ViewController: UIViewController {
     
       //MARK: Message Details
     func fetchMessageDetails(messageId: String) {
+        
+        print("======================================================================")
         
     
         guard let service = gmailService else {
@@ -507,28 +509,18 @@ class ViewController: UIViewController {
                                         // Save the extracted data to the document directory.
                                     }
                                 }
-                            }
-                        }
-                    }
-
-                    // ... (Rest of your code)
-
-                    
-                    
-                    
-                    // ... Print other payload details as needed
-
-                    if let bodyParts = payload.parts {
-                        for part in bodyParts {
-                            if let partBodyData = part.body?.data {
-                                if let decodedBody = Data(base64Encoded: partBodyData) {
-                                    if let bodyString = String(data: decodedBody, encoding: .utf8) {
-                                        print("Message Body: \(bodyString)")
+                                if let partBodyData = part.body?.data {
+                                    if let decodedBody = Data(base64Encoded: partBodyData) {
+                                        if let bodyString = String(data: decodedBody, encoding: .utf8) {
+                                            print("Message Body: \(bodyString)")
+                                        }
                                     }
                                 }
                             }
                         }
                     }
+
+               
                 }
 
                 // Handle other parts of the message as needed
