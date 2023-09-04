@@ -13,6 +13,44 @@ import GTMAppAuth
 
 var isLoggedIn: Bool?
 
+class EmailInfo {
+    enum Category {
+        case primary, promotions, social, updates, forums, sent, drafts, spam, trash
+    }
+    
+    var message: GTLRGmail_Message?
+    var category: Category?
+    var messageReceivedDate: String? = nil
+    var isRead: Bool? = nil
+    var isHasAttachment: Bool? = nil
+    var isStarred: Bool? = nil
+    var subject: String? = nil
+    var from: String? = nil
+    var to: String? = nil
+    var time: String? = nil
+    var messageBody: String? = nil
+    var messageID: String? = nil
+    
+    
+    init(message: GTLRGmail_Message, category: Category, messageReceivedDate: String?, isRead: Bool?, isHasAttachment: Bool?, isStarred: Bool?, subject: String?, from: String?, to: String?, time: String?, messageBody: String?, messageID: String?) {
+        self.message = message
+        self.category = category
+        self.messageReceivedDate = messageReceivedDate
+        self.isRead = isRead
+        self.isHasAttachment = isHasAttachment
+        self.isStarred = isStarred
+        self.subject = subject
+        self.from = from
+        self.to = to
+        self.time = time
+        self.messageBody = messageBody
+        self.messageID = messageID
+        
+    }
+    
+    init() {}
+}
+
 class ViewController: UIViewController {
     
     @IBOutlet weak var btnSignIn: GIDSignInButton!{
@@ -27,29 +65,18 @@ class ViewController: UIViewController {
     }
     
     // Define a struct to represent categorized messages
-    struct CategorizedMessage {
-        enum Category {
-            case primary, promotions, social, updates, forums, sent, drafts, spam, trash
-        }
-        
-        let message: GTLRGmail_Message
-        let category: Category
-        let messageReceivedDate: String?
-        let isRead: Bool?
-        let isHasAttachment: Bool?
-        
-    }
     
     
-    var primaryMessages: [CategorizedMessage] = []
-    var promotionsMessages: [CategorizedMessage] = []
-    var sentMessages: [CategorizedMessage] = []
-    var socialMessages: [CategorizedMessage] = []
-    var spamMessages: [CategorizedMessage] = []
-    var updatesMessages: [CategorizedMessage] = []
-    var forumsMessages: [CategorizedMessage] = []
-    var draftsMessages: [CategorizedMessage] = []
-    var trashMessages: [CategorizedMessage] = []
+    var primaryMessages: [EmailInfo] = []
+    var promotionsMessages: [EmailInfo] = []
+    var sentMessages: [EmailInfo] = []
+    var socialMessages: [EmailInfo] = []
+    var spamMessages: [EmailInfo] = []
+    var updatesMessages: [EmailInfo] = []
+    var forumsMessages: [EmailInfo] = []
+    var draftsMessages: [EmailInfo] = []
+    var trashMessages: [EmailInfo] = []
+    
     
     private var service: GTLRGmailService?
     var allMessages: [GTLRGmail_Message] = []
@@ -80,58 +107,8 @@ class ViewController: UIViewController {
             
         }
         
-        //   self.fetchEmails()
         
-        // Do any additional setup after loading the view.
     }
-    //    func requestAdditionalScopesAndMakeAPICall() {
-    //        let additionalScopes = ["https://www.googleapis.com/auth/gmail.readonly"]
-    //
-    //        guard let currentUser = GIDSignIn.sharedInstance.currentUser else {
-    //            return // Not signed in.
-    //        }
-    //
-    //        currentUser.addScopes(additionalScopes, presenting: self) { signInResult, error in
-    //            guard error == nil else { return }
-    //
-    //            // Get the user's granted scopes
-    //            let grantedScopes = currentUser.grantedScopes
-    //
-    //            // Check if the user granted access to the scopes you requested.
-    //            if ((grantedScopes?.contains("https://www.googleapis.com/auth/gmail.readonly")) != nil) {
-    //                // Make an API call with fresh tokens
-    //                currentUser.refreshTokensIfNeeded { user, error in
-    //                    guard error == nil else { return }
-    //                    guard let user = user else { return }
-    //
-    //                    // Get the access token to attach it to an API request.
-    //                    let accessToken = user.accessToken.tokenString
-    //
-    //                    // Initialize the Gmail service
-    //                    let service = GTLRGmailService()
-    //                    service.authorizer = user.fetcherAuthorizer
-    //
-    //                    // Create a Gmail API request
-    //                    let query = GTLRGmailQuery_UsersMessagesList.query(withUserId: "me")
-    //                    query.q = "is:unread"
-    //
-    //                    service.executeQuery(query) { ticket, result, error in
-    //                        // Handle the API response
-    //                        if error == nil, let messages = (result as? GTLRGmail_ListMessagesResponse)?.messages {
-    //                            // Process the list of unread messages
-    //                            for message in messages {
-    //                                if let messageId = message.identifier {
-    //                                    print("Unread message ID: \(messageId)")
-    //                                }
-    //                            }
-    //                        } else {
-    //                            print("Error fetching unread messages: \(error?.localizedDescription ?? "Unknown error")")
-    //                        }
-    //                    }
-    //                }
-    //            }
-    //        }
-    //    }
     
     @objc func btnSignInAction(){
         
@@ -339,261 +316,12 @@ class ViewController: UIViewController {
         }
     }
     
-    
-    
-    
-    
-    // MARK: Testing func and working
-    
-    //    func fetchInboxMessages(pageToken: String? = nil) {
-    //
-    //        guard let service = gmailService else {
-    //            print("Gmail service not configured")
-    //            return
-    //        }
-    //
-    //        var totalMessageFound = 0
-    //
-    //        let query = GTLRGmailQuery_UsersMessagesList.query(withUserId: "me")
-    //        // query.labelIds = ["SENT"]
-    //        //   query.labelIds = ["INBOX", "CATEGORY_PROMOTIONS", "CATEGORY_SOCIAL", "CATEGORY_UPDATES", "CATEGORY_FORUMS", "SENT", "DRAFT", "SPAM", "TRASH"]
-    //        query.pageToken = pageToken // Set the page token for pagination
-    //
-    //        //   query.q = "is:unread"
-    //        //   query.q = "has:attachment"
-    //
-    //        query.labelIds = ["SENT"]
-    //        query.pageToken = pageToken // Set the page token for pagination
-    //
-    //        service.executeQuery(query) { [weak self] (ticket, response, error) in
-    //            guard let self = self else { return }
-    //
-    //            if let error = error {
-    //                print("Error fetching inbox messages: \(error.localizedDescription)")
-    //                return
-    //            }
-    //
-    //            if let messagesResponse = response as? GTLRGmail_ListMessagesResponse,
-    //               let messages = messagesResponse.messages {
-    //
-    //                totalMessageFound += messages.count
-    //                print("Fetched count \(messages.count) inbox email messages")
-    //
-    //                for message in messages {
-    //
-    //                    //   print(message)
-    //
-    //                        self.fetchMessageDetails(messageId: message.identifier!)
-    //
-    //                    //  self.deleteMessage(messageId: message.identifier!)
-    //                }
-    //
-    //                // Fetch the next page if available
-    //                if let nextPageToken = messagesResponse.nextPageToken {
-    //                    self.fetchInboxMessages(pageToken: nextPageToken)
-    //                } else {
-    //                    // All messages have been fetched
-    //                    print("Total messages fetched: \(totalMessageFound)")
-    //                }
-    //            }
-    //        }
-    //    }
-    
-    
-    //      //MARK: Message Details
-    //    func fetchMessageDetails(messageId: String) {
-    //
-    //        print("======================================================================")
-    //
-    //
-    //        guard let service = gmailService else {
-    //            print("Gmail service not configured")
-    //            return
-    //        }
-    //        if i == 0 {
-    //            self.deleteMessage(messageId: messageId)
-    //            i += 1
-    //        }
-    //
-    //        let messageQuery = GTLRGmailQuery_UsersMessagesGet.query(withUserId: "me", identifier: messageId)
-    //        messageQuery.format = kGTLRGmailFormatFull
-    //
-    //        service.executeQuery(messageQuery) { (ticket, response, error) in
-    //            if let error = error {
-    //                print("Error fetching message details: \(error.localizedDescription)")
-    //                return
-    //            }
-    //
-    //            //            if let message = response as? GTLRGmail_Message {
-    //            //                if let headers = message.payload?.headers {
-    //            //                    let sender = self.getHeaderValue(headers, "From") ?? "Unknown"
-    //            //                    let receiver = self.getHeaderValue(headers, "To") ?? "Unknown"
-    //            //                    let subject = self.getHeaderValue(headers, "Subject") ?? "No Subject"
-    //            //                    print("Sender: \(sender)")
-    //            //                    print("Receiver: \(receiver)")
-    //            //                    print("Subject: \(subject)")
-    //            //
-    //            //
-    //            //                }
-    //            //
-    //            //                if let body = message.payload?.body?.data {
-    //            //                    if let decodedBody = Data(base64Encoded: body) {
-    //            //                        if let bodyString = String(data: decodedBody, encoding: .utf8) {
-    //            //                            print("Message Body: \(bodyString)")
-    //            //                        }
-    //            //                    }
-    //            //                }
-    //            //
-    //            //                // Handle other parts of the message as needed
-    //            //            }
-    //            if let message = response as? GTLRGmail_Message {
-    //                self.allMessages.append(message) // Store the entire message object
-    //
-    //                // Print all available fields and metadata
-    //                if let id = message.identifier {
-    //                    print("Message ID: \(id)")
-    //                }
-    //                if let snippet = message.snippet {
-    //                    print("Snippet: \(snippet)")
-    //                }
-    //                if let internalDate = message.internalDate {
-    //                    print("Internal Date: \(internalDate)")
-    //
-    //                }
-    //
-    //                // Check if the message is read or not
-    //                if let labelIds = message.labelIds {
-    //                    if labelIds.contains("UNREAD") {
-    //                        print("Status: Unread")
-    //                    } else {
-    //                        print("Status: Read")
-    //                    }
-    //                }
-    //
-    //                //   query.labelIds = ["INBOX", "CATEGORY_PROMOTIONS", "CATEGORY_SOCIAL", "CATEGORY_UPDATES", "CATEGORY_FORUMS", "SENT", "DRAFT", "SPAM", "TRASH"]
-    //
-    //                if let labelIds = message.labelIds {
-    //                    if labelIds.contains("INBOX") {
-    //                        print("Category: Inbox")
-    //                    }
-    //                    if labelIds.contains("CATEGORY_PROMOTIONS") {
-    //                        print("Category: Promotions")
-    //                    }
-    //                    if labelIds.contains("CATEGORY_SOCIAL") {
-    //                        print("Category: Social")
-    //                    }
-    //                    if labelIds.contains("CATEGORY_UPDATES") {
-    //                        print("Category: Update")
-    //                    }
-    //                    if labelIds.contains("CATEGORY_FORUMS") {
-    //                        print("Category: Forums")
-    //                    }
-    //                    if labelIds.contains("DRAFT") {
-    //                        print("Category: Draft")
-    //                    }
-    //                    if labelIds.contains("SENT") {
-    //                        print("Category: Sent")
-    //                    }
-    //                    if labelIds.contains("SPAM") {
-    //                        print("Category: Spam")
-    //                    }
-    //                    if labelIds.contains("TRASH") {
-    //                        print("Category: Trash")
-    //                    }
-    //                    // Add more category checks as needed
-    //                }
-    //                // ... Print other fields as needed
-    //
-    //                if let payload = message.payload {
-    //                    if let headers = payload.headers {
-    //                        for header in headers {
-    //                            if let name = header.name, let value = header.value {
-    //                                print("Header - \(name): \(value)")
-    //                                // Check for message category
-    //                                                            }
-    //
-    //                        }
-    //                    }
-    //                    if let mimeType = payload.mimeType {
-    //                        print("MIME Type: \(mimeType)")
-    //                    }
-    //                    if let filename = payload.filename {
-    //                        print("Filename: \(filename)")
-    //                    }
-    //
-    ////
-    ////                    if let parts = payload.parts {
-    ////                        for part in parts {
-    ////                            if let filename = part.filename, let mimeType = part.mimeType {
-    ////                                print("Attachment: \(filename), Mime Type: \(mimeType)")
-    ////
-    ////                            }
-    ////                        }
-    ////                    }
-    //                    // ... (Your existing code)
-    //
-    //                    if let payload = message.payload {
-    //                        // Rest of your payload processing code
-    //
-    //                        // Check for attachments
-    //                        if let parts = payload.parts {
-    //                            for part in parts {
-    //                                if let filename = part.filename, let mimeType = part.mimeType {
-    //                                    // Check if the part has an attachment ID
-    //                                    if let body = part.body, let attachmentId = body.attachmentId {
-    //                                        print("Attachment: \(filename), Mime Type: \(mimeType), Attachment ID: \(attachmentId)")
-    //
-    //                                        // Fetch attachment data using attachmentId
-    //                                        if let attachmentData = self.fetchAttachmentData(service: service, messageId: message.identifier ?? "", attachmentId: attachmentId) {
-    //                                            // Save attachment to document directory
-    //                                            if let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-    //                                                let fileURL = documentsDirectory.appendingPathComponent(filename)
-    //                                                do {
-    //                                                    try attachmentData.write(to: fileURL)
-    //                                                    print("Attachment saved to: \(fileURL)")
-    //                                                } catch {
-    //                                                    print("Error saving attachment: \(error.localizedDescription)")
-    //                                                }
-    //                                            }
-    //                                        }
-    //                                    } else {
-    //                                        print("Attachment without attachmentId: \(filename), Mime Type: \(mimeType)")
-    //
-    //                                        // Handling attachments without attachmentId
-    //                                        // You might need to extract the attachment data from the `part.body.data` in this case.
-    //                                        // Save the extracted data to the document directory.
-    //                                    }
-    //                                }
-    //                                if let partBodyData = part.body?.data {
-    //                                    if let decodedBody = Data(base64Encoded: partBodyData) {
-    //                                        if let bodyString = String(data: decodedBody, encoding: .utf8) {
-    //                                            print("Message Body: \(bodyString)")
-    //                                        }
-    //                                    }
-    //                                }
-    //                            }
-    //                        }
-    //                    }
-    //
-    //
-    //                }
-    //
-    //                // Handle other parts of the message as needed
-    //            }
-    //
-    //
-    //        }
-    //
-    //
-    //    }
     //MARK: WITH GROUP
     
     func fetchMessageDetails(messageId: String, completion: @escaping () -> Void) {
         
         
-        
-        
-        // print("======================================================================")
+        var emailInfo: EmailInfo = EmailInfo()
         
         guard let service = gmailService else {
             print("Gmail service not configured")
@@ -615,11 +343,15 @@ class ViewController: UIViewController {
                 return
             }
             
+            
             if let message = response as? GTLRGmail_Message {
                 self.allMessages.append(message) // Store the entire message object
                 
                 // Print all available fields and metadata
                 if let id = message.identifier {
+                    
+                    
+                    
                     print("Message ID: \(id)")
                 }
                 if let snippet = message.snippet {
@@ -638,37 +370,62 @@ class ViewController: UIViewController {
                     }
                 }
                 
-                // Check message categories
-                if let labelIds = message.labelIds {
-                    if labelIds.contains("INBOX") {
-                        print("Category: Inbox")
+                //Check message starred
+                if self.isTrashFetching == false{
+                    if let labelIds = message.labelIds {
+                        
+                        if labelIds.contains("STARRED") {
+                            print("this is starred message")
+                        }
+                        
                     }
-                    if labelIds.contains("CATEGORY_PROMOTIONS") {
-                        print("Category: Promotions")
-                    }
-                    if labelIds.contains("CATEGORY_SOCIAL") {
-                        print("Category: Social")
-                    }
-                    if labelIds.contains("CATEGORY_UPDATES") {
-                        print("Category: Update")
-                    }
-                    if labelIds.contains("CATEGORY_FORUMS") {
-                        print("Category: Forums")
-                    }
-                    if labelIds.contains("DRAFT") {
-                        print("Category: Draft")
-                    }
-                    if labelIds.contains("SENT") {
-                        print("Category: Sent")
-                    }
-                    if labelIds.contains("SPAM") {
-                        print("Category: Spam")
-                    }
-                    if labelIds.contains("TRASH") {
-                        print("Category: Trash")
-                    }
-                    // Add more category checks as needed
                 }
+                
+                
+                // Check message categories
+                
+                if self.isTrashFetching{
+                    print("Category: Trash")
+                    
+                    
+                }
+                else{
+                    
+                    if let labelIds = message.labelIds {
+                        
+                        if labelIds.contains("INBOX") {
+                            print("Category: Inbox")
+                        }
+                        else if labelIds.contains("CATEGORY_PROMOTIONS") {
+                            print("Category: Promotions")
+                        }
+                        else if labelIds.contains("CATEGORY_SOCIAL") {
+                            print("Category: Social")
+                        }
+                        else if labelIds.contains("CATEGORY_UPDATES") {
+                            print("Category: Update")
+                        }
+                        else if labelIds.contains("CATEGORY_FORUMS") {
+                            print("Category: Forums")
+                        }
+                        else if labelIds.contains("DRAFT") {
+                            print("Category: Draft")
+                        }
+                        else if labelIds.contains("SENT") {
+                            print("Category: Sent")
+                        }
+                        else if labelIds.contains("SPAM") {
+                            print("Category: Spam")
+                        }
+                        if labelIds.contains("TRASH") {
+                            print("Category: Trash")
+                        }
+                        // Add more category checks as needed
+                    }
+                    
+                }
+                
+                
                 
                 // Process message headers
                 if let payload = message.payload, let headers = payload.headers {
@@ -744,12 +501,13 @@ class ViewController: UIViewController {
         }
         
         group.notify(queue: .main) {
+            //
             completion()
         }
     }
     
     
-    //MARK: Fetch Message Details test
+    //MARK: Fetch Attachment data
     
     func fetchAttachmentData(service: GTLRGmailService, messageId: String, attachmentId: String) -> Data? {
         let attachmentQuery = GTLRGmailQuery_UsersMessagesAttachmentsGet.query(withUserId: "me", messageId: messageId, identifier: attachmentId)
@@ -781,9 +539,7 @@ class ViewController: UIViewController {
     }
     
     
-    
-    
-    
+
     func getHeaderValue(_ headers: [GTLRGmail_MessagePartHeader]?, _ name: String) -> String? {
         return headers?.first(where: { $0.name?.lowercased() == name.lowercased() })?.value
     }
@@ -806,220 +562,6 @@ class ViewController: UIViewController {
             print("Message with ID \(messageId) has been deleted.")
         }
     }
-    
-    
-    //    func fetchMessageDetails(messageId: String) {
-    //        guard let service = gmailService else {
-    //            print("Gmail service not configured")
-    //            return
-    //        }
-    //
-    //        let messageQuery = GTLRGmailQuery_UsersMessagesGet.query(withUserId: "me", identifier: messageId)
-    //        messageQuery.format = kGTLRGmailFormatFull
-    //
-    //        service.executeQuery(messageQuery) { (ticket, response, error) in
-    //            if let error = error {
-    //                print("Error fetching message details: \(error.localizedDescription)")
-    //                return
-    //            }
-    //
-    //            if let message = response as? GTLRGmail_Message {
-    //                if let headers = message.payload?.headers {
-    //                    for header in headers {
-    //                        print("\(header.name!): \(header.value!)")
-    //                    }
-    //                }
-    //
-    //                if let body = message.payload?.body?.data {
-    //                    if let decodedBody = Data(base64Encoded: body) {
-    //                        if let bodyString = String(data: decodedBody, encoding: .utf8) {
-    //                            print("Message Body: \(bodyString)")
-    //                        }
-    //                    }
-    //                }
-    //
-    //                // Handle other parts of the message as needed
-    //            }
-    //        }
-    //    }
-    
-    
-    
-    
-    
-    //working
-    //    func fetchInboxMessages() {
-    //        guard let service = gmailService else {
-    //            print("Gmail service not configured")
-    //            return
-    //        }
-    //
-    //        let query = GTLRGmailQuery_UsersMessagesList.query(withUserId: "emon.twinbit@gmail.com")
-    //
-    //        service.executeQuery(query) { (ticket, response, error) in
-    //
-    //
-    //            print("Ticket \(ticket)")
-    //            print("Response \(response.debugDescription)")
-    //            print("error \(String(describing: error))")
-    //
-    //            if let error = error {
-    //                print("Error fetching inbox messages: \(error.localizedDescription)")
-    //                return
-    //            }
-    //            if let messages = (response as? GTLRGmail_ListMessagesResponse)?.messages {
-    //
-    //                for message in messages {
-    //                    print("message ======= ======    \(message)")
-    //                }
-    //                print("Fetched \(messages.count) inbox email messages")
-    //
-    //                // Create a batch query to fetch message details
-    //                let batchQuery = GTLRBatchQuery()
-    //                for message in messages {
-    //                    let messageQuery = GTLRGmailQuery_UsersMessagesGet.query(withUserId: "me", identifier: message.identifier!)
-    //                    messageQuery.format = kGTLRGmailFormatFull
-    //                    batchQuery.addQuery(messageQuery)
-    //                }
-    //
-    //                service.executeQuery(batchQuery) { [weak self] (ticket, response, error) in
-    //                    guard let self = self else {
-    //                        return // Exit the closure if self is nil
-    //                    }
-    //
-    //                    if let error = error {
-    //                        print("Error fetching message details: \(error.localizedDescription)")
-    //                        return
-    //                    }
-    //
-    //                    if let batchResult = response as? [String: GTLRObject] {
-    //                        for (_, result) in batchResult {
-    //                            if let message = result as? GTLRGmail_Message {
-    //                                if let payload = message.payload, let headers = payload.headers {
-    //                                    for header in headers {
-    //                                        if header.name?.lowercased() == "subject" {
-    //                                            print("Message Subject: \(header.value ?? "")")
-    //                                            break
-    //                                        }
-    //                                    }
-    //                                }
-    //                            }
-    //                        }
-    //                    }
-    //                }
-    //            }
-    //
-    //
-    //
-    ////
-    ////            if let messages = (response as? GTLRGmail_ListMessagesResponse)?.messages {
-    ////                print("Fetched \(messages.count) inbox email messages")
-    ////
-    ////                // Create a batch query to fetch message details
-    ////                let batchQuery = GTLRBatchQuery()
-    ////                for message in messages {
-    ////                    let messageQuery = GTLRGmailQuery_UsersMessagesGet.query(withUserId: "me", identifier: message.identifier!)
-    ////                    messageQuery.format = kGTLRGmailFormatFull
-    ////                    batchQuery.addQuery(messageQuery)
-    ////                }
-    ////
-    ////                service.executeQuery(batchQuery) { [weak self] (ticket, response, error) in
-    ////
-    ////                    print("Ticket \(ticket)")
-    ////                    print("Response \(response.debugDescription)")
-    ////                    print("error \(String(describing: error))")
-    ////                   // self?.displayMessageDetailsList(ticket, finishedWithObject: response as? GTLRBatchResult, error: error)
-    ////                }
-    ////            }
-    //        }
-    //    }
-    
-    //    func displayMessageDetailsList(_ ticket: GTLRServiceTicket, finishedWithObject response: GTLRBatchResult?, error: Error?) {
-    //          if let error = error {
-    //              print("Error fetching message details: \(error.localizedDescription)")
-    //              return
-    //          }
-    //
-    //          if let messageList = response?.successes as? [GTLRGmail_Message] {
-    //              var messageDetails = ""
-    //              for message in messageList {
-    //                  if let snippet = message.snippet {
-    //                      messageDetails += "Snippet: \(snippet)\n\n"
-    //                  }
-    //              }
-    //              self.output?.text = messageDetails
-    //          }
-    //      }
-    
-    //    func fetchInboxMessages() {
-    //          guard let service = gmailService else {
-    //              print("Gmail service not configured")
-    //              return
-    //          }
-    //
-    //          let query = GTLRGmailQuery_UsersMessagesList.query(withUserId: "me")
-    //       //   query.q = "label:inbox" // Fetch messages from the inbox
-    //
-    //          service.executeQuery(query) { (ticket, response, error) in
-    //
-    //              print("Ticket \(ticket)")
-    //              print("Response \(response.debugDescription)")
-    //              print("error \(String(describing: error))")
-    //
-    //
-    //              if let error = error {
-    //                  print("Error fetching inbox messages: \(error.localizedDescription)")
-    //                  return
-    //              }
-    //
-    //              if let messages = (response as? GTLRGmail_ListMessagesResponse)?.messages {
-    //                  print("Fetched \(messages.count) inbox email messages")
-    //                  for message in messages {
-    //                      print("Message ID: \(message.identifier ?? "")")
-    //                  }
-    //              }
-    //          }
-    //      }
-    
-    
-    //    func fetchEmails() {
-    //        DispatchQueue.main.async { [weak self] in
-    //            guard let self = self else { return }
-    //
-    //            let session = MCOIMAPSession()
-    //            session.hostname = "pop.gmail.com"
-    //            session.port = 995
-    //            session.username = "emon.twinbit@gmail.com"
-    //            session.password = "e1m2o3n4"
-    //
-    //
-    //            let folder = "INBOX"
-    //            let requestKind: MCOIMAPMessagesRequestKind = [.headers, .flags, .structure]
-    //
-    //            let fetchOperation = session.fetchMessagesOperation(
-    //                withFolder: folder,
-    //                requestKind: requestKind,
-    //                uids: MCOIndexSet(range: MCORange(location: 1, length: UINT64_MAX))
-    //            )
-    //
-    //            print("Fetch Start")
-    //
-    //            fetchOperation?.start { error, fetchedMessages, _ in
-    //                if let error = error {
-    //                    print("Failed to fetch emails: \(error)")
-    //                    return
-    //                }
-    //                print("Fetch HERE IT COMES")
-    //
-    //                if let fetchedMessages = fetchedMessages as? [MCOIMAPMessage] {
-    //                    self.emails = fetchedMessages
-    //                    // Update UI here (e.g., reload table view)
-    //                }
-    //            }
-    //        }
-    //    }
-    
-    
     
 }
 
