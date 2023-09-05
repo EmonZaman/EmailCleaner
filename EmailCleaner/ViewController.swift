@@ -13,43 +13,7 @@ import GTMAppAuth
 
 var isLoggedIn: Bool?
 
-class EmailInfo {
-    enum Category {
-        case primary, promotions, social, updates, forums, sent, drafts, spam, trash
-    }
-    
-    var message: GTLRGmail_Message?
-    var category: Category?
-    var messageReceivedDate: String? = nil
-    var isRead: Bool? = nil
-    var isHasAttachment: Bool? = nil
-    var isStarred: Bool? = nil
-    var subject: String? = nil
-    var from: String? = nil
-    var to: String? = nil
-    var time: String? = nil
-    var messageBody: String? = nil
-    var messageID: String? = nil
-    
-    
-    init(message: GTLRGmail_Message, category: Category, messageReceivedDate: String?, isRead: Bool?, isHasAttachment: Bool?, isStarred: Bool?, subject: String?, from: String?, to: String?, time: String?, messageBody: String?, messageID: String?) {
-        self.message = message
-        self.category = category
-        self.messageReceivedDate = messageReceivedDate
-        self.isRead = isRead
-        self.isHasAttachment = isHasAttachment
-        self.isStarred = isStarred
-        self.subject = subject
-        self.from = from
-        self.to = to
-        self.time = time
-        self.messageBody = messageBody
-        self.messageID = messageID
-        
-    }
-    
-    init() {}
-}
+
 
 class ViewController: UIViewController {
     
@@ -64,34 +28,32 @@ class ViewController: UIViewController {
         }
     }
     
-    // Define a struct to represent categorized messages
     
+    @IBOutlet weak var lblTotalPrimaryMessagesCount: UILabel!
+    @IBOutlet weak var lblTotalPromotionsMessagesCount: UILabel!
+    @IBOutlet weak var lblTotalSentMessagesCount: UILabel!
+    @IBOutlet weak var lblTotalUpdatesMessagesCount: UILabel!
+    @IBOutlet weak var lblTotalSocialMessagesCount: UILabel!
+    @IBOutlet weak var lblTotalSpamMessagesCount: UILabel!
+    @IBOutlet weak var lblTotalForumsMessagesCount: UILabel!
+    @IBOutlet weak var lblTotaltDraftsMessagesCount: UILabel!
+    @IBOutlet weak var lblTotalTrashMessagesCount: UILabel!
+    @IBOutlet weak var lblTotalStarredMessagesCount: UILabel!
+
     
-    var primaryMessages: [EmailInfo] = []
-    var promotionsMessages: [EmailInfo] = []
-    var sentMessages: [EmailInfo] = []
-    var socialMessages: [EmailInfo] = []
-    var spamMessages: [EmailInfo] = []
-    var updatesMessages: [EmailInfo] = []
-    var forumsMessages: [EmailInfo] = []
-    var draftsMessages: [EmailInfo] = []
-    var trashMessages: [EmailInfo] = []
+    var nowFetchingMessageGroupTag: String?
     
     
     private var service: GTLRGmailService?
-    var allMessages: [GTLRGmail_Message] = []
     
-    var i = 0
     var totalMessageFound = 0
-    
-    var isTrashFetching = false
     
     private var gmailService: GTLRGmailService?
     var inboxMessages: [GTLRGmail_Message] = []
     // var service: GTLServiceGmail?
     var output: UITextView?
     
-    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -186,21 +148,91 @@ class ViewController: UIViewController {
                     
                     let dispatchGroup = DispatchGroup()
                     
-                    
-                    self.isTrashFetching = false
+                    self.nowFetchingMessageGroupTag = "INBOX"
                     self.fetchInboxMessages() {
                         print("1st time Found \(self.totalMessageFound)")
+                        
                         self.totalMessageFound = 0
-                        self.isTrashFetching = true
+
+                        
                         dispatchGroup.enter()
+                        self.nowFetchingMessageGroupTag = "CATEGORY_PROMOTIONS"
                         self.fetchInboxMessages {
                             
                             print("2nd time Found \(self.totalMessageFound)")
+                            self.totalMessageFound = 0
                             
+                            self.nowFetchingMessageGroupTag = "SENT"
+                            self.fetchInboxMessages {
+                                
+                                print("3rd time Found \(self.totalMessageFound)")
+                                self.totalMessageFound = 0
+                                
+                                
+                                self.nowFetchingMessageGroupTag = "DRAFT"
+                                self.fetchInboxMessages {
+                                    
+                                    print("4th time Found \(self.totalMessageFound)")
+                                    self.totalMessageFound = 0
+                                    
+                                    self.nowFetchingMessageGroupTag = "CATEGORY_SOCIAL"
+                                    self.fetchInboxMessages {
+                                        
+                                        print("5th time Found \(self.totalMessageFound)")
+                                        self.totalMessageFound = 0
+                                        
+                                        
+                                        self.nowFetchingMessageGroupTag = "SPAM"
+                                        self.fetchInboxMessages {
+                                            
+                                            print("6th time Found \(self.totalMessageFound)")
+                                            self.totalMessageFound = 0
+                                            
+                                            self.nowFetchingMessageGroupTag = "CATEGORY_UPDATES"
+                                            
+                                            self.fetchInboxMessages {
+                                                print("7th time Found \(self.totalMessageFound)")
+                                                self.totalMessageFound = 0
+                                                self.nowFetchingMessageGroupTag = "CATEGORY_FORUMS"
+                                                
+                                                self.fetchInboxMessages {
+                                                    print("8th time Found \(self.totalMessageFound)")
+                                                    self.totalMessageFound = 0
+                                                    
+                                                    self.nowFetchingMessageGroupTag = "TRASH"
+                                                    self.fetchInboxMessages {
+                                                        
+                                                        print("9th time Found \(self.totalMessageFound)")
+                                                        self.totalMessageFound = 0
+                                                        self.lblTotalSentMessagesCount.text = "Sent Messages: \(EmailManager.shared.sentMessages.count )"
+                                                        self.lblTotalPrimaryMessagesCount.text = "Primary Messages: \(EmailManager.shared.primaryMessages.count )"
+                                                        self.lblTotalPromotionsMessagesCount.text = "Promotions Messages: \(EmailManager.shared.promotionsMessages.count )"
+                                                        self.lblTotalSocialMessagesCount.text = "Social Messages: \(EmailManager.shared.socialMessages.count )"
+                                                        self.lblTotalForumsMessagesCount.text = "Forums Messages: \(EmailManager.shared.forumsMessages.count )"
+                                                        self.lblTotaltDraftsMessagesCount.text = "Draft Messages: \(EmailManager.shared.draftsMessages.count )"
+                                                        self.lblTotalSpamMessagesCount.text = "Spam Messages: \(EmailManager.shared.spamMessages.count )"
+                                                        self.lblTotalUpdatesMessagesCount.text = "Update Messages: \(EmailManager.shared.updatesMessages.count )"
+                                                        self.lblTotalTrashMessagesCount.text = "Trash Messages: \(EmailManager.shared.trashMessages.count )"
+                                                        
+                                                        self.lblTotalStarredMessagesCount.text = "STARRED MESSAGE: \(   EmailManager.shared.starredMessages.count )"
+                                                        
+                                                        print("ALL DONE")
+                                            
+                                                        dispatchGroup.leave()
+                                                        
+                                                    }
+                                                }
+                                            }
+                                            
+                                        }
+                                        
+                                    }
+                                    
+                                }
+                                
+                            }
                             
-                            dispatchGroup.leave()
                         }
-                        print("ALL DONE")
                         
                     }
                 }
@@ -239,14 +271,16 @@ class ViewController: UIViewController {
             return
         }
         
-        
-        
         let query = GTLRGmailQuery_UsersMessagesList.query(withUserId: "me")
         query.pageToken = pageToken // Set the page token for pagination
+        query.labelIds = ["\(self.nowFetchingMessageGroupTag ?? "")"]
         
-        if isTrashFetching{
-            query.labelIds = ["TRASH"]
-        }
+        print("\(self.nowFetchingMessageGroupTag ?? "")")
+        
+        //        if isTrashFetching{
+        //            query.labelIds = ["TRASH"]
+        //        }
+        
         
         query.pageToken = pageToken // Set the page token for pagination
         
@@ -284,7 +318,6 @@ class ViewController: UIViewController {
                     }
                 }
                 
-                
                 // Notify when all message details have been fetched
                 dispatchGroup.notify(queue: .main) {
                     // Debug prints to help identify the issue
@@ -306,6 +339,7 @@ class ViewController: UIViewController {
                 }
                 
             } else {
+                print("Total messages fetched count ==== final: \(self.totalMessageFound)")
                 group.leave()
                 debugPrint("hellooooooo")
             }
@@ -320,6 +354,7 @@ class ViewController: UIViewController {
     
     func fetchMessageDetails(messageId: String, completion: @escaping () -> Void) {
         
+        print(EmailManager.shared.primaryMessages.count )
         
         var emailInfo: EmailInfo = EmailInfo()
         
@@ -345,12 +380,13 @@ class ViewController: UIViewController {
             
             
             if let message = response as? GTLRGmail_Message {
-                self.allMessages.append(message) // Store the entire message object
+
+                emailInfo.message = message
                 
                 // Print all available fields and metadata
                 if let id = message.identifier {
                     
-                    
+            
                     
                     print("Message ID: \(id)")
                 }
@@ -370,60 +406,133 @@ class ViewController: UIViewController {
                     }
                 }
                 
-                //Check message starred
-                if self.isTrashFetching == false{
-                    if let labelIds = message.labelIds {
-                        
-                        if labelIds.contains("STARRED") {
-                            print("this is starred message")
-                        }
-                        
+                if let labelIds = message.labelIds {
+                    
+                    if labelIds.contains("STARRED") {
+                        print("this is starred message")
+                        EmailManager.shared.appendEmail(emailInfo, to: .starred)
+                
                     }
+                    
+                }
+                
+                if self.nowFetchingMessageGroupTag == "INBOX"{
+                    
+                  
+                    EmailManager.shared.appendEmail(emailInfo, to: .primary)
+                }
+                else if self.nowFetchingMessageGroupTag == "TRASH"{
+                    EmailManager.shared.appendEmail(emailInfo, to: .trash)
+                }
+                
+                else if self.nowFetchingMessageGroupTag == "SENT"{
+                    EmailManager.shared.appendEmail(emailInfo, to: .sent)
+                }
+                else if self.nowFetchingMessageGroupTag == "CATEGORY_PROMOTIONS"{
+                    EmailManager.shared.appendEmail(emailInfo, to: .promotions)
+                }
+                else if self.nowFetchingMessageGroupTag == "CATEGORY_UPDATES"{
+                    EmailManager.shared.appendEmail(emailInfo, to: .updates)
+                }
+                else if self.nowFetchingMessageGroupTag == "CATEGORY_FORUMS"{
+                    EmailManager.shared.appendEmail(emailInfo, to: .forums)
+                }
+                
+                else if self.nowFetchingMessageGroupTag == "SPAM"{
+                    EmailManager.shared.appendEmail(emailInfo, to: .spam)
+                }
+                else if self.nowFetchingMessageGroupTag == "DRAFT"{
+                    EmailManager.shared.appendEmail(emailInfo, to: .drafts)
+                }
+                else if self.nowFetchingMessageGroupTag == "CATEGORY_SOCIAL"{
+                    EmailManager.shared.appendEmail(emailInfo, to: .social)
                 }
                 
                 
                 // Check message categories
                 
-                if self.isTrashFetching{
-                    print("Category: Trash")
-                    
-                    
-                }
-                else{
-                    
-                    if let labelIds = message.labelIds {
-                        
-                        if labelIds.contains("INBOX") {
-                            print("Category: Inbox")
-                        }
-                        else if labelIds.contains("CATEGORY_PROMOTIONS") {
-                            print("Category: Promotions")
-                        }
-                        else if labelIds.contains("CATEGORY_SOCIAL") {
-                            print("Category: Social")
-                        }
-                        else if labelIds.contains("CATEGORY_UPDATES") {
-                            print("Category: Update")
-                        }
-                        else if labelIds.contains("CATEGORY_FORUMS") {
-                            print("Category: Forums")
-                        }
-                        else if labelIds.contains("DRAFT") {
-                            print("Category: Draft")
-                        }
-                        else if labelIds.contains("SENT") {
-                            print("Category: Sent")
-                        }
-                        else if labelIds.contains("SPAM") {
-                            print("Category: Spam")
-                        }
-                        if labelIds.contains("TRASH") {
-                            print("Category: Trash")
-                        }
-                        // Add more category checks as needed
-                    }
-                    
-                }
+                //                if self.isTrashFetching{
+                //
+                //                    self.trashMessages.append(emailInfo)
+                //                    print("Category: Trash")
+                //
+                //
+                //                }
+                //                else{
+                //
+                //                    if self.nowFetchingMessageGroupTag == "INBOX"{
+                //                        self.primaryMessages.append(emailInfo)
+                //                    }
+                //                    else if self.nowFetchingMessageGroupTag == "TRASH"{
+                //                        self.trashMessages.append(emailInfo)
+                //                    }
+                //
+                //                    else if self.nowFetchingMessageGroupTag == "SENT"{
+                //                        self.sentMessages.append(emailInfo)
+                //                    }
+                //                    else if self.nowFetchingMessageGroupTag == "CATEGORY_PROMOTIONS"{
+                //                        self.promotionsMessages.append(emailInfo)
+                //                    }
+                //                    else if self.nowFetchingMessageGroupTag == "CATEGORY_UPDATES"{
+                //                        self.updatesMessages.append(emailInfo)
+                //                    }
+                //                    else if self.nowFetchingMessageGroupTag == "CATEGORY_FORUMS"{
+                //                        self.forumsMessages.append(emailInfo)
+                //                    }
+                //
+                //                    else if self.nowFetchingMessageGroupTag == "SPAM"{
+                //                        self.spamMessages.append(emailInfo)
+                //                    }
+                //                    else if self.nowFetchingMessageGroupTag == "DRAFT"{
+                //                        self.draftsMessages.append(emailInfo)
+                //                    }
+                //                    else if self.nowFetchingMessageGroupTag == "CATEGORY_SOCIAL"{
+                //                        self.socialMessages.append(emailInfo)
+                //                    }
+                //
+                //
+                //
+                //
+                ////                    if let labelIds = message.labelIds {
+                ////                        print(labelIds)
+                ////
+                ////                        if labelIds.contains("INBOX") {
+                ////                            self.primaryMessages.append(emailInfo)
+                ////                            print("Category: Inbox")
+                ////                        }
+                ////                        else if labelIds.contains("CATEGORY_PROMOTIONS") {
+                ////                            self.promotionsMessages.append(emailInfo)
+                ////                            print("Category: Promotions")
+                ////                        }
+                ////                        else if labelIds.contains("CATEGORY_SOCIAL") {
+                ////                            self.socialMessages.append(emailInfo)
+                ////                            print("Category: Social")
+                ////                        }
+                ////                        else if labelIds.contains("CATEGORY_UPDATES") {
+                ////                            self.updatesMessages.append(emailInfo)
+                ////                            print("Category: Update")
+                ////                        }
+                ////                        else if labelIds.contains("CATEGORY_FORUMS") {
+                ////                            self.forumsMessages.append(emailInfo)
+                ////                            print("Category: Forums")
+                ////                        }
+                ////                        else if labelIds.contains("DRAFT") {
+                ////                            self.draftsMessages.append(emailInfo)
+                ////                            print("Category: Draft")
+                ////                        }
+                ////                        else if labelIds.contains("SENT") {
+                ////                            self.sentMessages.append(emailInfo)
+                ////                            print("Category: Sent")
+                ////                        }
+                ////                        else if labelIds.contains("SPAM") {
+                ////                            self.spamMessages.append(emailInfo)
+                ////                            print("Category: Spam")
+                ////                        }
+                ////
+                ////                        // Add more category checks as needed
+                ////                    }
+                //
+                //                }
                 
                 
                 
@@ -539,7 +648,7 @@ class ViewController: UIViewController {
     }
     
     
-
+    
     func getHeaderValue(_ headers: [GTLRGmail_MessagePartHeader]?, _ name: String) -> String? {
         return headers?.first(where: { $0.name?.lowercased() == name.lowercased() })?.value
     }

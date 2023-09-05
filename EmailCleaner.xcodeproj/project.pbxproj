@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0A5E9B2734D6C3EEBF7FF709 /* Pods_EmailCleaner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A480EE51955F549D91CE3CF2 /* Pods_EmailCleaner.framework */; };
+		FE27C7042AA6F96400F5E81B /* EmailManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE27C7032AA6F96400F5E81B /* EmailManager.swift */; };
 		FE5CEAB52A8C963300F61FEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5CEAB42A8C963300F61FEC /* AppDelegate.swift */; };
 		FE5CEAB72A8C963300F61FEC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5CEAB62A8C963300F61FEC /* SceneDelegate.swift */; };
 		FE5CEAB92A8C963300F61FEC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5CEAB82A8C963300F61FEC /* ViewController.swift */; };
@@ -23,6 +24,7 @@
 		A480EE51955F549D91CE3CF2 /* Pods_EmailCleaner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EmailCleaner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF9C5E9F230F4903CC24B680 /* Pods-EmailCleaner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmailCleaner.debug.xcconfig"; path = "Target Support Files/Pods-EmailCleaner/Pods-EmailCleaner.debug.xcconfig"; sourceTree = "<group>"; };
 		E16ABA4EEC0CAD7D0363F140 /* Pods-EmailCleaner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmailCleaner.release.xcconfig"; path = "Target Support Files/Pods-EmailCleaner/Pods-EmailCleaner.release.xcconfig"; sourceTree = "<group>"; };
+		FE27C7032AA6F96400F5E81B /* EmailManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailManager.swift; sourceTree = "<group>"; };
 		FE5CEAB12A8C963300F61FEC /* EmailCleaner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmailCleaner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE5CEAB42A8C963300F61FEC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FE5CEAB62A8C963300F61FEC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 				FE5CEAC52A8C963400F61FEC /* Info.plist */,
 				FE5CEABD2A8C963300F61FEC /* EmailCleaner.xcdatamodeld */,
 				FE89E1502A947CB20005C0B3 /* GmailService.swift */,
+				FE27C7032AA6F96400F5E81B /* EmailManager.swift */,
 			);
 			path = EmailCleaner;
 			sourceTree = "<group>";
@@ -226,6 +229,7 @@
 				FE5CEAB52A8C963300F61FEC /* AppDelegate.swift in Sources */,
 				FE5CEAB72A8C963300F61FEC /* SceneDelegate.swift in Sources */,
 				FE5CEABF2A8C963300F61FEC /* EmailCleaner.xcdatamodeld in Sources */,
+				FE27C7042AA6F96400F5E81B /* EmailManager.swift in Sources */,
 				FE89E1512A947CB20005C0B3 /* GmailService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
