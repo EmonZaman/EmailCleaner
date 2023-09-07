@@ -25,8 +25,9 @@ class EmailInfo {
     var time: String? = nil
     var messageBody: String? = nil
     var messageID: String? = nil
+    var attachmentFilename: String?
     
-    init(message: GTLRGmail_Message, messageReceivedDate: String?, isRead: Bool?, isHasAttachment: Bool?, isStarred: Bool?, subject: String?, from: String?, to: String?, time: String?, messageBody: String?, messageID: String?) {
+    init(message: GTLRGmail_Message, messageReceivedDate: String?, isRead: Bool?, isHasAttachment: Bool?, isStarred: Bool?, subject: String?, from: String?, to: String?, time: String?, messageBody: String?, messageID: String?, attachmentFilename: String?) {
         self.message = message
         self.messageReceivedDate = messageReceivedDate
         self.isRead = isRead
@@ -38,6 +39,7 @@ class EmailInfo {
         self.time = time
         self.messageBody = messageBody
         self.messageID = messageID
+        self.attachmentFilename = attachmentFilename
     }
     
     init() {}
@@ -84,6 +86,8 @@ class EmailManager {
         }
     }
     
+    
+    
     // Remove an email from the specified category
     //    func removeEmail(_ email: EmailInfo, from category: EmailInfo.Category) {
     //        switch category {
@@ -104,4 +108,7 @@ class EmailManager {
     //    }
     
     // Add more methods as needed to manage and interact with email messages
+    
+    
+    
 }

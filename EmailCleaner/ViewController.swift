@@ -104,6 +104,105 @@ class ViewController: UIViewController {
                         
                         print("FALSE ===== 2222")
                         
+                            
+                            print("FALSE ===== else codition and authorized")
+                            service.authorizer =  user.fetcherAuthorizer
+                            self.gmailService = service
+                            
+                            // Fetch inbox messages using batch query
+                            // self.fetchInboxMessages()
+                            
+                            let dispatchGroup = DispatchGroup()
+                            
+                            self.nowFetchingMessageGroupTag = "INBOX"
+                            self.fetchInboxMessages() {
+                                print("1st time Found \(self.totalMessageFound)")
+                                
+                                self.totalMessageFound = 0
+
+                                
+                                dispatchGroup.enter()
+                                self.nowFetchingMessageGroupTag = "CATEGORY_PROMOTIONS"
+                                self.fetchInboxMessages {
+                                    
+                                    print("2nd time Found \(self.totalMessageFound)")
+                                    self.totalMessageFound = 0
+                                    
+                                    self.nowFetchingMessageGroupTag = "SENT"
+                                    self.fetchInboxMessages {
+                                        
+                                        print("3rd time Found \(self.totalMessageFound)")
+                                        self.totalMessageFound = 0
+                                        
+                                        
+                                        self.nowFetchingMessageGroupTag = "DRAFT"
+                                        self.fetchInboxMessages {
+                                            
+                                            print("4th time Found \(self.totalMessageFound)")
+                                            self.totalMessageFound = 0
+                                            
+                                            self.nowFetchingMessageGroupTag = "CATEGORY_SOCIAL"
+                                            self.fetchInboxMessages {
+                                                
+                                                print("5th time Found \(self.totalMessageFound)")
+                                                self.totalMessageFound = 0
+                                                
+                                                
+                                                self.nowFetchingMessageGroupTag = "SPAM"
+                                                self.fetchInboxMessages {
+                                                    
+                                                    print("6th time Found \(self.totalMessageFound)")
+                                                    self.totalMessageFound = 0
+                                                    
+                                                    self.nowFetchingMessageGroupTag = "CATEGORY_UPDATES"
+                                                    
+                                                    self.fetchInboxMessages {
+                                                        print("7th time Found \(self.totalMessageFound)")
+                                                        self.totalMessageFound = 0
+                                                        self.nowFetchingMessageGroupTag = "CATEGORY_FORUMS"
+                                                        
+                                                        self.fetchInboxMessages {
+                                                            print("8th time Found \(self.totalMessageFound)")
+                                                            self.totalMessageFound = 0
+                                                            
+                                                            self.nowFetchingMessageGroupTag = "TRASH"
+                                                            self.fetchInboxMessages {
+                                                                
+                                                                print("9th time Found \(self.totalMessageFound)")
+                                                                self.totalMessageFound = 0
+                                                                self.lblTotalSentMessagesCount.text = "Sent Messages: \(EmailManager.shared.sentMessages.count )"
+                                                                self.lblTotalPrimaryMessagesCount.text = "Primary Messages: \(EmailManager.shared.primaryMessages.count )"
+                                                                self.lblTotalPromotionsMessagesCount.text = "Promotions Messages: \(EmailManager.shared.promotionsMessages.count )"
+                                                                self.lblTotalSocialMessagesCount.text = "Social Messages: \(EmailManager.shared.socialMessages.count )"
+                                                                self.lblTotalForumsMessagesCount.text = "Forums Messages: \(EmailManager.shared.forumsMessages.count )"
+                                                                self.lblTotaltDraftsMessagesCount.text = "Draft Messages: \(EmailManager.shared.draftsMessages.count )"
+                                                                self.lblTotalSpamMessagesCount.text = "Spam Messages: \(EmailManager.shared.spamMessages.count )"
+                                                                self.lblTotalUpdatesMessagesCount.text = "Update Messages: \(EmailManager.shared.updatesMessages.count )"
+                                                                self.lblTotalTrashMessagesCount.text = "Trash Messages: \(EmailManager.shared.trashMessages.count )"
+                                                                
+                                                                self.lblTotalStarredMessagesCount.text = "STARRED MESSAGE: \(   EmailManager.shared.starredMessages.count )"
+                                                                
+                                                                print("ALL DONE")
+                                                    
+                                                                dispatchGroup.leave()
+                                                                
+                                                            }
+                                                        }
+                                                    }
+                                                    
+                                                }
+                                                
+                                            }
+                                            
+                                        }
+                                        
+                                    }
+                                    
+                                }
+                                
+                            }
+                        
+                        
                         // Check if the user granted access to the scopes you requested.
                     }
                     
@@ -130,10 +229,10 @@ class ViewController: UIViewController {
                         self.gmailService = service
                         
                         // Fetch inbox messages using batch query
-                        self.fetchInboxMessages() {
-                            
-                            print("ALL DONE")
-                        }
+//                        self.fetchInboxMessages() {
+//
+//                            print("ALL DONE")
+//                        }
                     }
                     // Request additional Drive scope.
                 }
@@ -356,7 +455,7 @@ class ViewController: UIViewController {
         
         print(EmailManager.shared.primaryMessages.count )
         
-        var emailInfo: EmailInfo = EmailInfo()
+        let emailInfo: EmailInfo = EmailInfo()
         
         guard let service = gmailService else {
             print("Gmail service not configured")
@@ -387,66 +486,30 @@ class ViewController: UIViewController {
                 if let id = message.identifier {
                     
             
-                    
+                    emailInfo.messageID = id
                     print("Message ID: \(id)")
                 }
                 if let snippet = message.snippet {
                     print("Snippet: \(snippet)")
                 }
                 if let internalDate = message.internalDate {
+                    emailInfo.message?.internalDate = internalDate
                     print("Internal Date: \(internalDate)")
                 }
                 
                 // Check if the message is read or not
                 if let labelIds = message.labelIds {
                     if labelIds.contains("UNREAD") {
+                        emailInfo.isRead = false
                         print("Status: Unread")
                     } else {
+                        emailInfo.isRead = true
                         print("Status: Read")
                     }
                 }
                 
-                if let labelIds = message.labelIds {
-                    
-                    if labelIds.contains("STARRED") {
-                        print("this is starred message")
-                        EmailManager.shared.appendEmail(emailInfo, to: .starred)
-                
-                    }
-                    
-                }
-                
-                if self.nowFetchingMessageGroupTag == "INBOX"{
-                    
-                  
-                    EmailManager.shared.appendEmail(emailInfo, to: .primary)
-                }
-                else if self.nowFetchingMessageGroupTag == "TRASH"{
-                    EmailManager.shared.appendEmail(emailInfo, to: .trash)
-                }
-                
-                else if self.nowFetchingMessageGroupTag == "SENT"{
-                    EmailManager.shared.appendEmail(emailInfo, to: .sent)
-                }
-                else if self.nowFetchingMessageGroupTag == "CATEGORY_PROMOTIONS"{
-                    EmailManager.shared.appendEmail(emailInfo, to: .promotions)
-                }
-                else if self.nowFetchingMessageGroupTag == "CATEGORY_UPDATES"{
-                    EmailManager.shared.appendEmail(emailInfo, to: .updates)
-                }
-                else if self.nowFetchingMessageGroupTag == "CATEGORY_FORUMS"{
-                    EmailManager.shared.appendEmail(emailInfo, to: .forums)
-                }
-                
-                else if self.nowFetchingMessageGroupTag == "SPAM"{
-                    EmailManager.shared.appendEmail(emailInfo, to: .spam)
-                }
-                else if self.nowFetchingMessageGroupTag == "DRAFT"{
-                    EmailManager.shared.appendEmail(emailInfo, to: .drafts)
-                }
-                else if self.nowFetchingMessageGroupTag == "CATEGORY_SOCIAL"{
-                    EmailManager.shared.appendEmail(emailInfo, to: .social)
-                }
+               
+             
                 
                 
                 // Check message categories
@@ -544,10 +607,14 @@ class ViewController: UIViewController {
                             
                             // Check for specific headers like "From", "To", "Subject", etc.
                             if name.lowercased() == "from" {
+                                
                                 print("Sender: \(value)")
+                                emailInfo.from = value
                             } else if name.lowercased() == "to" {
+                                emailInfo.to = value
                                 print("Receiver: \(value)")
                             } else if name.lowercased() == "subject" {
+                                emailInfo.subject = value
                                 print("Subject: \(value)")
                             }
                             // Add more header checks as needed
@@ -557,12 +624,24 @@ class ViewController: UIViewController {
                 
                 // Process message body and attachments
                 if let payload = message.payload {
+                    var type: String?
                     if let mimeType = payload.mimeType {
                         print("MIME Type: \(mimeType)")
+                        type = mimeType
+                        
                     }
                     if let filename = payload.filename {
                         print("Filename: \(filename)")
+                        emailInfo.isHasAttachment = true
+                        emailInfo.attachmentFilename = "\(filename).\(type)"
                     }
+                    else{
+                        emailInfo.isHasAttachment = false
+                    }
+                    
+                  
+                    
+        
                     
                     // Check for attachments
                     if let parts = payload.parts {
@@ -598,11 +677,29 @@ class ViewController: UIViewController {
                                 if let decodedBody = Data(base64Encoded: partBodyData) {
                                     if let bodyString = String(data: decodedBody, encoding: .utf8) {
                                         print("Message Body: \(bodyString)")
+                                        
+                                        emailInfo.messageBody = bodyString
                                     }
                                 }
                             }
                         }
                     }
+                }
+                if let labelIds = message.labelIds {
+                    
+                    if labelIds.contains("STARRED") {
+                        
+                        emailInfo.isStarred = true
+                        
+                        
+                        print("STARTEDDDDDDDDDDD \(self.nowFetchingMessageGroupTag) == \(emailInfo.subject)")
+                        EmailManager.shared.appendEmail(emailInfo, to: .starred)
+                
+                    }
+                    else{
+                        emailInfo.isStarred = false
+                    }
+                    
                 }
             }
             
@@ -610,6 +707,41 @@ class ViewController: UIViewController {
         }
         
         group.notify(queue: .main) {
+            
+            
+            if self.nowFetchingMessageGroupTag == "INBOX"{
+                
+              
+                EmailManager.shared.appendEmail(emailInfo, to: .primary)
+            }
+            else if self.nowFetchingMessageGroupTag == "TRASH"{
+                EmailManager.shared.appendEmail(emailInfo, to: .trash)
+            }
+            
+            else if self.nowFetchingMessageGroupTag == "SENT"{
+                EmailManager.shared.appendEmail(emailInfo, to: .sent)
+            }
+            else if self.nowFetchingMessageGroupTag == "CATEGORY_PROMOTIONS"{
+                EmailManager.shared.appendEmail(emailInfo, to: .promotions)
+            }
+            else if self.nowFetchingMessageGroupTag == "CATEGORY_UPDATES"{
+                EmailManager.shared.appendEmail(emailInfo, to: .updates)
+            }
+            else if self.nowFetchingMessageGroupTag == "CATEGORY_FORUMS"{
+                EmailManager.shared.appendEmail(emailInfo, to: .forums)
+            }
+            
+            else if self.nowFetchingMessageGroupTag == "SPAM"{
+                EmailManager.shared.appendEmail(emailInfo, to: .spam)
+            }
+            else if self.nowFetchingMessageGroupTag == "DRAFT"{
+                EmailManager.shared.appendEmail(emailInfo, to: .drafts)
+            }
+            else if self.nowFetchingMessageGroupTag == "CATEGORY_SOCIAL"{
+                EmailManager.shared.appendEmail(emailInfo, to: .social)
+            }
+            
+            print("INFFOOOOOOOOOOOOOOOO \(emailInfo)")
             //
             completion()
         }
