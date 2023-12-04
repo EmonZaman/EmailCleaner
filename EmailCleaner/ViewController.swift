@@ -53,10 +53,28 @@ class ViewController: UIViewController {
     // var service: GTLServiceGmail?
     var output: UITextView?
     
+    
+    // Set the navigation title with a large title style
+   
+
+    // Create a right bar button item
+    let rightBarButton = UIBarButtonItem(
+        title: "Sign Out",
+        style: .plain,
+        target: self,
+        action: #selector(btnSignInAction)
+    )
+    
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.title = "Email Cleaner"
+        
+        // Set the right bar button item
+        navigationItem.rightBarButtonItem = rightBarButton
         
         print("view controller")
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -72,6 +90,10 @@ class ViewController: UIViewController {
         
     }
     
+    @objc func rightBarButtonTapped() {
+           // Handle the tap on the right bar button here
+       }
+    
     @objc func btnSignInAction(){
         
         GIDSignIn.sharedInstance.signIn(withPresenting: self) { signInResult, error in
@@ -81,7 +103,8 @@ class ViewController: UIViewController {
                 
                 print("FALSE ===== 1111")
                 
-                let driveScope = "https://www.googleapis.com/auth/gmail.modify"
+                let driveScope = "https://mail.google.com/"
+            
                 
                 let grantedScopes = user.grantedScopes
                 let service = GTLRGmailService()
@@ -92,8 +115,8 @@ class ViewController: UIViewController {
                 
                 if grantedScopes == nil || !grantedScopes!.contains(driveScope) {
                     
-                    //  let additionalScopes = ["https://www.googleapis.com/auth/gmail.readonly"]
-                    let additionalScopes = ["https://www.googleapis.com/auth/gmail.readonly", "https://www.googleapis.com/auth/gmail.modify"]
+                     let additionalScopes = ["https://mail.google.com/"]
+              
                     
                     guard let currentUser = GIDSignIn.sharedInstance.currentUser else {
                         return ;  /* Not signed in. */

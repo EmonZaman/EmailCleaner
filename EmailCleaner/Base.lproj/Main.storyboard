@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GMY-1F-4Mz">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
@@ -17,14 +17,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AKd-Fb-T8O" customClass="GIDSignInButton">
-                                <rect key="frame" x="76" y="259" width="241" height="50"/>
+                                <rect key="frame" x="76" y="303" width="241" height="50"/>
                                 <color key="backgroundColor" systemColor="systemBlueColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="qXp-Mm-VWq"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NYo-iM-G24">
-                                <rect key="frame" x="153.66666666666666" y="361" width="86" height="35"/>
+                                <rect key="frame" x="153.66666666666666" y="405" width="86" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="FOQ-Dv-6a0"/>
                                     <constraint firstAttribute="width" constant="86" id="FTl-cl-JZg"/>
@@ -113,6 +113,7 @@
                             <constraint firstItem="AKd-Fb-T8O" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="76" id="tiM-44-ofh"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="0Pl-KG-NCM"/>
                     <connections>
                         <outlet property="btnSignIn" destination="AKd-Fb-T8O" id="cQO-0t-3JU"/>
                         <outlet property="btnSignOut" destination="NYo-iM-G24" id="yUh-uv-Njr"/>
@@ -129,6 +130,24 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="950.38167938931292" y="3.5211267605633805"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="4o4-xi-ZIx">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GMY-1F-4Mz" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="0Ch-jQ-Ync">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Znc-eT-9NT"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MrM-KB-Hot" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="23.664122137404579" y="3.5211267605633805"/>
         </scene>

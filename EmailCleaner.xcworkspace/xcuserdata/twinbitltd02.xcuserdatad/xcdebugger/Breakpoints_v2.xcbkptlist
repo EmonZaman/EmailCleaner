@@ -14,8 +14,8 @@
             filePath = "EmailCleaner/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "233"
-            endingLineNumber = "233"
+            startingLineNumber = "256"
+            endingLineNumber = "256"
             landmarkName = "btnSignInAction()"
             landmarkType = "7">
             <Locations>
@@ -79,6 +79,21 @@
                   endingLineNumber = "234"
                   offsetFromSymbolStart = "48">
                </Location>
+               <Location
+                  uuid = "6931DD63-AC92-4187-ACDA-425F69C8C34C - c000fa2abcb87565"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Swift.Optional&lt;__C.GIDGoogleUser&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 (Swift.Optional&lt;__C.GIDSignInResult&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in EmailCleaner.ViewController.btnSignInAction() -&gt; ()"
+                  moduleName = "EmailCleaner"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/twinbitltd02/Desktop/ML/EmailCleaner/EmailCleaner/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "258"
+                  endingLineNumber = "258"
+                  offsetFromSymbolStart = "588">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -92,8 +107,8 @@
             filePath = "EmailCleaner/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "429"
-            endingLineNumber = "429"
+            startingLineNumber = "452"
+            endingLineNumber = "452"
             landmarkName = "fetchInboxMessages(pageToken:completion:)"
             landmarkType = "7">
             <Locations>
@@ -142,6 +157,21 @@
                   endingLineNumber = "429"
                   offsetFromSymbolStart = "1060">
                </Location>
+               <Location
+                  uuid = "5BE26A75-546B-4E71-A8E6-0AF6D5A2F1F1 - f4e643920bb5397a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; () in closure #1 (__C.GTLRServiceTicket, Swift.Optional&lt;Any&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in EmailCleaner.ViewController.fetchInboxMessages(pageToken: Swift.Optional&lt;Swift.String&gt;, completion: () -&gt; ()) -&gt; ()"
+                  moduleName = "EmailCleaner"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/twinbitltd02/Desktop/ML/EmailCleaner/EmailCleaner/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "451"
+                  endingLineNumber = "451"
+                  offsetFromSymbolStart = "1060">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -155,10 +185,42 @@
             filePath = "EmailCleaner/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "745"
-            endingLineNumber = "745"
+            startingLineNumber = "768"
+            endingLineNumber = "768"
             landmarkName = "fetchMessageDetails(messageId:completion:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "08E8B4BC-29C3-4A4F-B44B-24A99C2A1AB6 - 285714ab94671e00"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; () in EmailCleaner.ViewController.fetchMessageDetails(messageId: Swift.String, completion: () -&gt; ()) -&gt; ()"
+                  moduleName = "EmailCleaner"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/twinbitltd02/Desktop/ML/EmailCleaner/EmailCleaner/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "746"
+                  endingLineNumber = "746"
+                  offsetFromSymbolStart = "4748">
+               </Location>
+               <Location
+                  uuid = "08E8B4BC-29C3-4A4F-B44B-24A99C2A1AB6 - 285714ab94671956"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; () in EmailCleaner.ViewController.fetchMessageDetails(messageId: Swift.String, completion: () -&gt; ()) -&gt; ()"
+                  moduleName = "EmailCleaner"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/twinbitltd02/Desktop/ML/EmailCleaner/EmailCleaner/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "768"
+                  endingLineNumber = "768"
+                  offsetFromSymbolStart = "4748">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -171,10 +233,42 @@
             filePath = "EmailCleaner/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "696"
-            endingLineNumber = "696"
+            startingLineNumber = "719"
+            endingLineNumber = "719"
             landmarkName = "fetchMessageDetails(messageId:completion:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "F43FA1BA-224D-400F-A2CB-07E0054CB962 - 798e726f269d3f48"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.GTLRServiceTicket, Swift.Optional&lt;Any&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in EmailCleaner.ViewController.fetchMessageDetails(messageId: Swift.String, completion: () -&gt; ()) -&gt; ()"
+                  moduleName = "EmailCleaner"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/twinbitltd02/Desktop/ML/EmailCleaner/EmailCleaner/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "696"
+                  endingLineNumber = "696"
+                  offsetFromSymbolStart = "12268">
+               </Location>
+               <Location
+                  uuid = "F43FA1BA-224D-400F-A2CB-07E0054CB962 - 798e726f269d3a32"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.GTLRServiceTicket, Swift.Optional&lt;Any&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in EmailCleaner.ViewController.fetchMessageDetails(messageId: Swift.String, completion: () -&gt; ()) -&gt; ()"
+                  moduleName = "EmailCleaner"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/twinbitltd02/Desktop/ML/EmailCleaner/EmailCleaner/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "718"
+                  endingLineNumber = "718"
+                  offsetFromSymbolStart = "12268">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -187,8 +281,136 @@
             filePath = "EmailCleaner/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "106"
-            endingLineNumber = "106"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
+            landmarkName = "btnSignInAction()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "9C23C1A3-456B-4851-83DF-E4BECEAEF0C7 - 46ca59822632d8c0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;__C.GIDSignInResult&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 (Swift.Optional&lt;__C.GIDSignInResult&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in EmailCleaner.ViewController.btnSignInAction() -&gt; ()"
+                  moduleName = "EmailCleaner"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/twinbitltd02/Desktop/ML/EmailCleaner/EmailCleaner/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "108"
+                  endingLineNumber = "108"
+                  offsetFromSymbolStart = "424">
+               </Location>
+               <Location
+                  uuid = "9C23C1A3-456B-4851-83DF-E4BECEAEF0C7 - 46ca59822632da2a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;__C.GIDSignInResult&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 (Swift.Optional&lt;__C.GIDSignInResult&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in EmailCleaner.ViewController.btnSignInAction() -&gt; ()"
+                  moduleName = "EmailCleaner"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/twinbitltd02/Desktop/ML/EmailCleaner/EmailCleaner/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "130"
+                  endingLineNumber = "130"
+                  offsetFromSymbolStart = "424">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E5551699-4ECF-4FBE-B1A1-34D22D9AD3D7"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EmailCleaner/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
+            landmarkName = "btnSignInAction()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "E5551699-4ECF-4FBE-B1A1-34D22D9AD3D7 - d7c05563b435bb6b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "EmailCleaner.ViewController.btnSignInAction() -&gt; ()"
+                  moduleName = "EmailCleaner"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/twinbitltd02/Desktop/ML/EmailCleaner/EmailCleaner/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "99"
+                  endingLineNumber = "99"
+                  offsetFromSymbolStart = "72">
+               </Location>
+               <Location
+                  uuid = "E5551699-4ECF-4FBE-B1A1-34D22D9AD3D7 - 284fdc3126c25328"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;__C.GIDSignInResult&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in EmailCleaner.ViewController.btnSignInAction() -&gt; ()"
+                  moduleName = "EmailCleaner"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/twinbitltd02/Desktop/ML/EmailCleaner/EmailCleaner/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "101"
+                  endingLineNumber = "101"
+                  offsetFromSymbolStart = "148">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "82545ABE-200E-453D-B2C7-2A26EF195033"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EmailCleaner/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "125"
+            endingLineNumber = "125"
+            landmarkName = "btnSignInAction()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "AFB94879-B8AE-401D-B9B7-3D3762EA416F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EmailCleaner/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
+            landmarkName = "btnSignInAction()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "62AC5BF9-ED11-4F7F-96A2-D97A03AC7F26"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EmailCleaner/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
             landmarkName = "btnSignInAction()"
             landmarkType = "7">
          </BreakpointContent>

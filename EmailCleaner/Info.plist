@@ -5,12 +5,16 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>com.googleusercontent.apps.1005954152207-999l12lch29kbltmu4utrpl7ho7sobpd</string>
 			</array>
 		</dict>
 	</array>
+	<key>GIDClientID</key>
+	<string>1005954152207-999l12lch29kbltmu4utrpl7ho7sobpd.apps.googleusercontent.com</string>
 	<key>Google</key>
 	<dict>
 		<key>SignIn</key>
@@ -21,8 +25,6 @@
 			</array>
 		</dict>
 	</dict>
-	<key>GIDClientID</key>
-	<string>1005954152207-999l12lch29kbltmu4utrpl7ho7sobpd.apps.googleusercontent.com</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
